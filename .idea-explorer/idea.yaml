@@ -1,0 +1,27 @@
+idea:
+  title: Layer-wise Probing Analysis of Belief Encoding in LLMs
+  domain: nlp
+  hypothesis: 'Open-source Large Language Models such as GPT-2 and the Meta Llama
+    series encode epistemic and non-epistemic belief types in distinct internal layers,
+    and these representations may reflect either deep semantic understanding or surface-level
+    linguistic patterns.
+
+    '
+  background:
+    description: "Inspired by Professor Tan\u2019s inquiry, \u201CDo LLMs differentiate\
+      \ epistemic belief from non-epistemic belief?\u201D, and the psychological framework\
+      \ established by Vesga et al. (2025), we aim to conduct a layer-wise probing\
+      \ analysis of open-source Large Language Models (LLMs)\u2014specifically OpenAI\u2019\
+      s GPT-2 and the Meta Llama series. Our objective is to identify which internal\
+      \ layers encode belief types and determine whether these representations reflect\
+      \ deep semantic understanding or merely surface-level linguistic patterns. Future\
+      \ work may include application to hallucination detection.\n"
+  metadata:
+    author: Chenxi Peng
+    source: IdeaHub
+    source_url: https://hypogenic.ai/ideahub/idea/uRpccVOe4BmpJo6uDBPN
+    idea_id: layer_wise_probing_analysis_of_20260221_205037_4e81c9f9
+    created_at: '2026-02-21T20:50:37.299600'
+    status: submitted
+    github_repo_name: layer-wise-probing-llm-ece7-codex
+    github_repo_url: https://github.com/Hypogenic-AI/layer-wise-probing-llm-ece7-codex
