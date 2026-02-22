@@ -1,0 +1,796 @@
+You are an academic paper writer. Generate a complete NEURIPS style paper
+based on the experiment results provided.
+
+════════════════════════════════════════════════════════════════════════════════
+                         IMPORTANT: BEFORE YOU START
+════════════════════════════════════════════════════════════════════════════════
+
+Before writing any content, you MUST complete these steps:
+
+1. READ THE SKILL: Review the paper-writer skill at .codex/skills/paper-writer/SKILL.md
+2. READ THE STYLE GUIDE: Study templates/paper_writing/lab_style_guide.md carefully
+3. REVIEW EXAMPLES: Browse paper_examples/ for formatting and language patterns:
+   - Look at sections/1.introduction.tex for language style
+   - Look at tables/*.tex for table formatting
+   - Look at commands/*.tex for macro usage
+4. VERIFY COMMAND TEMPLATES: Command templates (math.tex, general.tex, macros.tex) are pre-copied to paper_draft/commands/
+
+CRITICAL: Reference example papers for FORMATTING and LANGUAGE STYLE only.
+Do NOT copy content, phrasing, or narrative structure from the example papers.
+The examples are in a different research domain - focus only on presentation style.
+
+════════════════════════════════════════════════════════════════════════════════
+                            EXPERIMENT REPORT
+════════════════════════════════════════════════════════════════════════════════
+
+# Layer-wise Probing Analysis of Belief Encoding in LLMs
+
+## 1. Executive Summary
+We tested whether open-source LLMs encode epistemic vs non-epistemic belief signals in distinct internal layers using layer-wise linear probes on GPT-2 family models and a Llama-family checkpoint.
+
+Key finding: belief-related information is decodable in specific layers (especially for TruthfulQA-style epistemic labels), but robustness and validation-layer alignment are inconsistent, so evidence favors mixed semantic + surface-pattern encoding rather than clean semantic abstraction.
+
+Practically, this suggests layer-local probes can be useful for diagnostics, but should not be treated as proof of deep belief semantics without stronger robustness/causal checks.
+
+## 2. Goal
+- Hypothesis: GPT-2 and Meta Llama-family models encode epistemic and non-epistemic belief types in separable internal layers; these signals may be semantic or superficial.
+- Importance: clarifies interpretability claims around &#34;belief&#34; in LLM internals and informs future hallucination-detection mechanisms.
+- Problem solved: provides a reproducible cross-model layer-wise probe pipeline with perturbation controls.
+- Expected impact: better standards for interpreting probe-based claims in LLM safety/reliability work.
+
+## 3. Data Construction
+
+### Dataset Description
+- ToMi-NLI (`datasets/tomi_nli`): non-epistemic/Theory-of-Mind-style entailment setup.
+- TruthfulQA multiple choice (`datasets/truthful_qa_multiple_choice`): epistemic truthfulness labeling using candidate answer correctness.
+- Final run sample sizes (for feasibility with Llama-7B):
+  - ToMi-NLI: train 300 / val 80 / test 80
+  - TruthfulQA-MC expanded candidate examples: train 300 / val 80 / test 80
+
+Known limitations:
+- TruthfulQA candidate-level labels are class-imbalanced (test: 59 negatives, 21 positives).
+- Llama access limitation: gated `meta-llama/*` models were unavailable; used public Llama-family `huggyllama/llama-7b`.
+
+### Example Samples
+| Dataset | Input (abridged) | Label |
+|---|---|---|
+| ToMi-NLI | Premise about object movement + hypothesis entailment | `entailment`/`not_entailment` |
+| TruthfulQA-MC | Question + candidate answer, classify truthful/not | `1` truthful / `0` not truthful |
+
+### Data Quality
+- Missing values: 0% in all splits (from `results/data_summary.json`).
+- ToMi class distribution (test): 41 negative / 39 positive.
+- TruthfulQA class distribution (test): 59 negative / 21 positive.
+- Word-length stats recorded in `results/data_summary.json`.
+
+### Preprocessing Steps
+1. Converted ToMi examples to prompt-style text (`Premise/Hypothesis/Question`).
+2. Expanded TruthfulQA MC into candidate-level binary classification examples.
+3. Built lexical perturbation variants (word substitutions) for robustness tests.
+4. Built rephrased-template variants for cross-template transfer checks.
+
+### Train/Val/Test Splits
+- ToMi-NLI: sampled from native train/validation/test splits.
+- TruthfulQA-MC: stratified split from validation pool into train/val/test (60/20/20), then downsampled to configured caps.
+
+## 4. Experiment Description
+
+### Methodology
+#### High-Level Approach
+For each model and each transformer layer, extract last-token hidden states, train linear probes, and evaluate on:
+- original test,
+- lexical perturbation test,
+- rephrased template test.
+
+#### Why This Method?
+- Layer-wise linear probing is the standard first-pass localization method from prior belief-representation work.
+- Perturbation and rephrasing test whether decodability is robust beyond exact wording.
+- Surface TF-IDF logistic baseline tests whether simple lexical features explain performance.
+
+Alternatives considered but not implemented in this cycle:
+- Causal activation interventions (kept for follow-up).
+- Larger sample sizes (reduced for full 3-model completion with Llama).
+
+### Implementation Details
+#### Tools and Libraries
+- Python 3.12.2
+- torch 2.10.0+cu128
+- transformers 5.2.0
+- scikit-learn 1.8.0
+- scipy 1.17.0
+- statsmodels 0.14.6
+- datasets, pandas, seaborn, matplotlib
+
+#### Algorithms/Models
+- Models: `gpt2`, `gpt2-medium`, `huggyllama/llama-7b`.
+- Probes: `StandardScaler + LogisticRegression(liblinear, class_weight=&#39;balanced&#39;)` per layer.
+- Surface baseline: `TF-IDF (1-2 grams) + LogisticRegression`.
+
+#### Hyperparameters
+| Parameter | Value | Selection Method |
+|---|---:|---|
+| max_train | 300 | feasibility constraint |
+| max_val | 80 | feasibility constraint |
+| max_test | 80 | feasibility constraint |
+| random seeds | 42, 43, 44 | fixed reproducibility |
+| max_length | 256 | default cap |
+| probe solver | liblinear | stable binary logistic |
+| probe class weight | balanced | class imbalance mitigation |
+
+#### Pipeline
+1. Load and validate datasets.
+2. Create original/perturbed/rephrased text variants.
+3. Extract hidden states layer-wise.
+4. Train probe per layer (3 seed runs).
+5. Compute metrics (AUROC, Accuracy, F1, ECE, Brier).
+6. Compute robustness deltas and Wilcoxon tests + FDR correction.
+
+### Experimental Protocol
+#### Reproducibility Information
+- Runs averaged over seeds: 3.
+- Hardware: 2x NVIDIA RTX 3090 (24GB each), CUDA enabled.
+- Batch sizes: adaptive (64 for smaller models, 16 for Llama hidden size).
+- Mixed precision: CUDA autocast enabled for feature extraction.
+- Validation check: repeated reduced gpt2 run produced identical `stats_summary.csv` (`REPRO_MATCH`).
+
+#### Evaluation Metrics
+- AUROC: ranking quality for binary labels.
+- Accuracy / F1: thresholded classification quality.
+- ECE / Brier: calibration quality.
+- Robustness drop: original AUROC minus perturbed/rephrased AUROC.
+
+### Raw Results
+#### Main Summary (peak-by-validation layer)
+| Model | Task | Peak Layer | Test AUROC | Perturbed AUROC | Rephrased AUROC |
+|---|---|---:|---:|---:|---:|
+| gpt2 | tomi_nli | 5 | 0.447 | 0.644 | 0.500 |
+| gpt2 | truthfulqa_mc | 1 | 0.609 | 0.605 | 0.486 |
+| gpt2-medium | tomi_nli | 10 | 0.438 | 0.477 | 0.531 |
+| gpt2-medium | truthfulqa_mc | 10 | 0.617 | 0.576 | 0.531 |
+| llama7b | tomi_nli | 13 | 0.551 | 0.456 | 0.483 |
+| llama7b | truthfulqa_mc | 9 | 0.639 | 0.693 | 0.498 |
+
+#### Best test-layer AUROC (independent of val-picked layer)
+| Model | ToMi best AUROC (layer) | TruthfulQA best AUROC (layer) |
+|---|---:|---:|
+| gpt2 | 0.545 (L9) | 0.692 (L9) |
+| gpt2-medium | 0.537 (L16) | 0.701 (L19) |
+| llama7b | 0.551 (L13) | 0.756 (L13/15 tie) |
+
+#### Surface Baseline (TF-IDF)
+| Task | AUROC | Accuracy |
+|---|---:|---:|
+| tomi_nli | 0.568 | 0.538 |
+| truthfulqa_mc | 0.526 | 0.763 |
+
+#### Statistical Tests (Wilcoxon + BH-FDR)
+- No robustness difference reached FDR &lt; 0.05.
+- All corrected p-values were &gt;= 0.1875.
+
+#### Visualizations
+- Layer curves: `results/plots/layerwise_val_auroc.png`
+- Perturbation drops: `results/plots/perturbation_drop.png`
+
+#### Output Locations
+- Metrics table: `results/layerwise_metrics.csv`
+- Statistics summary: `results/stats_summary.csv`
+- Baseline summary: `results/baseline_summary.csv`
+- Environment + data quality: `results/environment.json`, `results/data_summary.json`
+- Aggregated JSON: `results/metrics.json`
+
+## 5. Result Analysis
+
+### Key Findings
+1. Decodable signal exists at specific layers, strongest on TruthfulQA in later layers for larger models (e.g., Llama7B ~0.756 AUROC at best test layer).
+2. Validation-chosen peak layers were unstable for some settings (e.g., GPT-2 ToMi), indicating sensitivity to split/selection noise.
+3. Robustness behavior was mixed: some conditions improved under perturbation, others degraded; no FDR-significant consistent drop.
+4. Surface baseline was competitive on ToMi, supporting the possibility of non-semantic shortcut capture.
+
+### Hypothesis Testing Results
+- Hypothesis partially supported: layer-local decodability is present.
+- Hypothesis not strongly supported on semantic robustness: perturbation/rephrase consistency was weak and statistically non-significant.
+- Multiple-comparison-corrected significance: none below 0.05.
+- Effect sizes from seed-level comparisons were near zero due deterministic probe behavior under current setup.
+
+### Comparison to Baselines
+- On TruthfulQA, hidden-state probes exceeded TF-IDF AUROC for best layers (notably Llama7B).
+- On ToMi, gains over surface baseline were limited/inconsistent.
+- Practical conclusion: probes add signal, but semantic interpretation remains uncertain.
+
+### Surprises and Insights
+- Validation peak layers did not always align with top test layers.
+- Some perturbations increased AUROC, suggesting lexical edits may occasionally simplify decision boundaries instead of challenging semantics.
+
+### Error Analysis
+- Class imbalance in TruthfulQA likely inflated accuracy but depressed F1 sensitivity for positive class.
+- ToMi performance hovered near chance for several model/layer combinations.
+
+### Limitations
+- Reduced sample sizes (compute-constrained for full multi-model run).
+- Llama model is a public Llama-family mirror, not gated latest Meta release.
+- No causal intervention in this cycle.
+- Seed-based inferential statistics limited by near-deterministic solver behavior.
+
+## 6. Conclusions
+Layer-wise probes reveal belief-related decodable information in GPT-2 and Llama-family internals, especially for epistemic truthfulness prompts. However, robustness and layer-selection instability indicate these signals are not clean evidence of deep semantic belief representation. The current evidence is most consistent with mixed representations containing both meaningful and superficial linguistic components.
+
+## 7. Next Steps
+### Immediate Follow-ups
+1. Add causal activation intervention at top layers (ITI/RepBelief-style) to test mechanistic relevance beyond decodability.
+2. Increase dataset size and use grouped cross-validation for stable peak-layer estimation.
+3. Add stronger semantic-preserving perturbations (entity role swaps, paraphrase models) and OOD templates.
+
+### Alternative Approaches
+- Probe heads (not only residual stream layers).
+- Use sparse/CCS probes for interpretability and robustness.
+
+### Broader Extensions
+- Apply layer-local belief signals to hallucination detection and confidence recalibration.
+
+### Open Questions
+- Which signals remain invariant under strict semantic equivalence transformations?
+- Do intervention directions transfer across model families and tasks?
+
+## Validation Checklist (Phase 5)
+- Code validation: completed (`src/belief_probing_experiment.py` runs end-to-end).
+- Reproducibility check: completed on reduced gpt2 run (`REPRO_MATCH`).
+- Scientific checks: metrics + nonparametric tests + FDR included; limitations documented.
+- Documentation checks: required sections, figures, and output paths included.
+
+## References
+- Zhu et al. (2024), *Language Models Represent Beliefs of Self and Others*.
+- Bortoletto et al. (2024), *Brittle Minds, Fixable Activations*.
+- Azaria &amp; Mitchell (2023), *The Internal State of an LLM Knows When It’s Lying*.
+- Herrmann &amp; Levinstein (2024), *Standards for Belief Representations in LLMs*.
+- Dies et al. (2025), *Representational and Behavioral Stability of Truth in LLMs*.
+
+
+════════════════════════════════════════════════════════════════════════════════
+                            RESEARCH PLAN
+════════════════════════════════════════════════════════════════════════════════
+
+# Research Plan: Layer-wise Probing Analysis of Belief Encoding in LLMs
+
+## Motivation &amp; Novelty Assessment
+
+### Why This Research Matters
+Understanding where and how belief-related signals are encoded in LLM internals is important for interpretability and reliability: if epistemic beliefs are represented distinctly, we can target those features for diagnosis and control. This directly benefits safety work on hallucination mitigation and confidence calibration. It also clarifies whether apparent “belief reasoning” is mechanistic or merely a surface pattern effect.
+
+### Gap in Existing Work
+Prior work (e.g., RepBelief, brittle-activation analyses, truth-probe papers) shows decodability of belief/truth signals, but cross-family comparisons under one standardized pipeline are limited, especially between GPT-2 and Meta Llama checkpoints on both ToM and epistemic truth tasks. Robustness checks against lexical/surface perturbations are still underused, creating uncertainty about semantic vs superficial encoding.
+
+### Our Novel Contribution
+We run a unified layer-wise probe pipeline across GPT-2 and Meta Llama models on both non-epistemic (ToMi-NLI belief-state) and epistemic (TruthfulQA MC framing) tasks, then stress-test probes with controlled perturbations. We combine decodability, cross-template generalization, and perturbation-stability metrics to separate semantic signal from lexical shortcut signal.
+
+### Experiment Justification
+- Experiment 1: Layer-wise linear probing across models/tasks to localize where belief-type information is decodable.
+- Experiment 2: Lexical/surface perturbation robustness to test whether probe performance survives wording changes.
+- Experiment 3: Cross-template transfer and control-feature baselines to estimate semantic generalization vs spurious dependence.
+
+## Research Question
+Do GPT-2 and Meta Llama models encode epistemic and non-epistemic belief types in distinct internal layers, and do those encodings reflect semantic understanding rather than superficial linguistic cues?
+
+## Background and Motivation
+Literature indicates linear probes can decode belief/truth signals from mid-to-late layers, but conceptual critiques warn that decodability alone does not imply genuine representation. A stronger design requires controls and perturbation tests. This project targets that gap with a shared, reproducible protocol across two model families.
+
+## Hypothesis Decomposition
+- H1 (Layer localization): Belief labels are significantly decodable above controls, peaking in specific middle/late layers.
+- H2 (Task-dependent localization): Peak layers differ between non-epistemic belief-state reasoning (ToMi-NLI) and epistemic truthfulness (TruthfulQA-derived labels).
+- H3 (Semantic robustness): If encoding is semantic, probe performance should remain relatively stable under lexical/syntactic perturbations and cross-template transfer.
+- H4 (Surface-pattern alternative): If performance collapses under perturbation while in-template performance stays high, representations are likely superficial.
+
+Independent variables:
+- Model family/checkpoint (GPT-2 variants, Meta Llama variants)
+- Layer index
+- Task type (ToMi-NLI vs TruthfulQA)
+- Input condition (original vs perturbation)
+
+Dependent variables:
+- Probe AUROC, Accuracy, F1, ECE, Brier
+- Robustness deltas (original minus perturbed)
+
+Success criteria:
+- Statistically significant layer-wise separation from controls (p &lt; 0.05 with multiple-comparison correction)
+- Reproducible localization patterns across seeds
+- Quantified robustness profile that supports or refutes semantic encoding claim
+
+## Proposed Methodology
+
+### Approach
+Extract hidden states per layer for each example, train lightweight linear probes per layer, and evaluate across tasks and perturbation conditions. Use identical data splits and probe settings across models to ensure fair comparison.
+
+### Experimental Steps
+1. Data loading and validation for ToMi-NLI and TruthfulQA MC, with class-balance checks and schema validation.
+2. Build two classification targets:
+   - ToMi-NLI label mapping for belief-state/NLI signal.
+   - TruthfulQA MC label from best true vs best false option scoring setup.
+3. Generate controlled perturbations (entity renaming, syntactic alternation, lexical substitution while preserving meaning).
+4. Extract final-token (and pooled-token sensitivity check) hidden states for every layer.
+5. Train layer-wise logistic probes with train/val splits; test on held-out and perturbed sets.
+6. Add baselines: random labels, bag-of-words/logistic control, and random projection control.
+7. Run across seeds {42, 43, 44}; aggregate mean/std and confidence intervals.
+8. Statistical testing: paired tests across layers/conditions with BH-FDR correction.
+
+### Baselines
+- Random-label probe baseline (sanity floor)
+- Surface baseline: bag-of-words TF-IDF logistic model
+- Random projection baseline from hidden states
+- Majority-class baseline
+
+### Evaluation Metrics
+- Primary: AUROC, Accuracy, Macro-F1
+- Calibration: ECE, Brier
+- Robustness: performance drop under perturbation; cross-template transfer gap
+- Localization: peak-layer index and area-under-layer-curve
+
+### Statistical Analysis Plan
+- Null hypothesis H0: no difference between original and perturbed probe performance; no layer effect beyond controls.
+- Tests:
+  - Repeated-measures comparisons across layers (nonparametric Friedman if normality fails; otherwise RM-ANOVA).
+  - Paired permutation or Wilcoxon tests for original vs perturbed metrics.
+- Multiple comparisons: Benjamini-Hochberg FDR at q=0.05.
+- Effect sizes: Cohen’s d (paired), Kendall’s W/Friedman effect as appropriate.
+
+## Expected Outcomes
+Support for hypothesis if:
+- Distinct peak layers emerge and differ by task/model.
+- Probe performance remains meaningfully above controls under perturbation.
+Refutation/qualification if:
+- Gains disappear under perturbation or are matched by surface baselines.
+
+## Timeline and Milestones
+- M1 (Planning complete): design + metrics finalized.
+- M2 (Setup): environment, dependencies, GPU config, reproducibility config.
+- M3 (Implementation): data processing, activation extraction, probing pipeline.
+- M4 (Experiments): baseline + full runs across models and seeds.
+- M5 (Analysis): stats, plots, robustness and error analysis.
+- M6 (Documentation): REPORT.md and README.md with reproducible commands.
+
+## Potential Challenges
+- Meta Llama gated access on Hugging Face.
+  - Mitigation: detect and log access status; use available Llama checkpoints in workspace/cache and keep GPT-2 runs complete.
+- GPU memory pressure for larger Llama checkpoints.
+  - Mitigation: bf16/fp16 loading, gradient-free inference, capped batch sizes.
+- Label construction ambiguity for TruthfulQA.
+  - Mitigation: document deterministic label mapping and sensitivity checks.
+
+## Success Criteria
+- End-to-end reproducible scripts in `src/` run without manual edits.
+- Results artifacts produced in `results/` (JSON + plots).
+- REPORT.md contains actual quantitative findings and statistical tests.
+
+
+════════════════════════════════════════════════════════════════════════════════
+                          LITERATURE REVIEW
+════════════════════════════════════════════════════════════════════════════════
+
+# Literature Review: Layer-wise Probing Analysis of Belief Encoding in LLMs
+
+## Review Scope
+
+### Research Question
+Do open-source LLMs (especially GPT-2-family and Llama-family models) encode epistemic and non-epistemic belief states in distinct internal layers, and are these representations genuinely semantic vs superficial linguistic artifacts?
+
+### Inclusion Criteria
+- Paper studies internal LLM representations, probing, or activation interventions.
+- Paper studies truthfulness, belief states, uncertainty, or Theory-of-Mind style reasoning.
+- Paper provides implementation detail, dataset details, or actionable baselines.
+
+### Exclusion Criteria
+- Purely prompt-level studies with no internal representation analysis.
+- Non-LLM work without transfer value for probing/intervention design.
+
+### Time Frame
+- Primary: 2023-2026
+
+### Sources
+- Paper-finder search service (`.claude/skills/paper-finder/scripts/find_papers.py`)
+- Semantic Scholar metadata via paper-finder output
+- arXiv PDF retrieval (when available)
+- ACL anthology (for selected papers)
+
+## Search Log
+
+| Date | Query | Source | Results | Notes |
+|------|-------|--------|---------|-------|
+| 2026-02-22 | &#34;Layer-wise probing belief encoding LLM epistemic&#34; | paper-finder | 70 papers | Used fast mode after diligent mode stalled |
+| 2026-02-22 | Relevance filtering (&gt;=2) | local filtering | 18 papers | 17 PDFs downloaded; 1 unresolved |
+| 2026-02-22 | Dataset search (truthful, ToM, belief) | HuggingFace datasets | 3 selected datasets | Downloaded and validated |
+| 2026-02-22 | Code search (belief probing/intervention) | GitHub API + paper links | 5 repos cloned | Includes official RepBelief + probing baselines |
+
+## Screening Results
+
+- Total discovered: 70
+- Included for detailed review: 18 (relevance &gt;= 2)
+- Downloaded full PDFs: 17
+- Not fully accessible: 1 (`Truth-value judgment in language models: &#39;truth directions&#39; are context sensitive`)
+
+## Key Papers
+
+### 1) Language Models Represent Beliefs of Self and Others (ICML 2024)
+- **Authors**: Wentao Zhu, Zhining Zhang, Yizhou Wang
+- **Source**: arXiv / ICML
+- **Key Contribution**: Shows belief states (self/other) can be linearly decoded from internal activations.
+- **Methodology**: Layer/head probing with logistic and multinomial probes; activation intervention along belief directions.
+- **Datasets Used**: BigToM; ToMi (generalization section).
+- **Baselines**: Random directions, uninfluenced model behavior.
+- **Results**: Strong middle-layer/head separability and causal behavior shifts under intervention.
+- **Code Available**: Yes (`code/RepBelief/`).
+- **Relevance**: Directly aligned with layer-wise belief probing hypothesis.
+
+### 2) Brittle Minds, Fixable Activations (2024)
+- **Authors**: Matteo Bortoletto et al.
+- **Source**: arXiv
+- **Key Contribution**: Probing-detected belief representations are sensitive to prompt perturbation but can be improved with interventions.
+- **Methodology**: Probe analysis across Llama/Pythia variants; causal interventions (CAA/ITI-style comparisons).
+- **Datasets Used**: False-belief style prompts and controlled prompt variants.
+- **Baselines**: No intervention, random intervention, control tasks.
+- **Results**: Mid/late-layer signal exists but brittleness indicates nontrivial spurious sensitivity.
+- **Code Available**: paper code + compatible intervention repos.
+- **Relevance**: Important caution for semantic-vs-surface interpretation.
+
+### 3) The Internal State of an LLM Knows When It’s Lying (Findings EMNLP 2023)
+- **Authors**: A. Azaria, Tom Mitchell
+- **Key Contribution**: Internal states reveal truthful vs false outputs better than output text alone.
+- **Methodology**: Supervised probing on hidden states.
+- **Datasets Used**: Author-constructed truth/lie prompts.
+- **Results**: Detectable latent truthfulness signal.
+- **Code Available**: Related probing code in `code/Probes/`.
+- **Relevance**: Foundational for epistemic probe design.
+
+### 4) Still No Lie Detector for Language Models (2023)
+- **Authors**: B. Levinstein, D. Herrmann
+- **Key Contribution**: Critiques empirical/conceptual limits of current lie-detection probes.
+- **Methodology**: Probe evaluation under distribution shifts and conceptual constraints.
+- **Results**: Highlights fragility and interpretation risk.
+- **Relevance**: Essential negative/control framing for this project.
+
+### 5) Standards for Belief Representations in LLMs (2024)
+- **Authors**: D. Herrmann, B. Levinstein
+- **Key Contribution**: Proposes standards for claiming belief representations in LLM internals.
+- **Methodology**: Conceptual + methodological framework.
+- **Relevance**: Useful criteria for avoiding overclaiming semantic understanding.
+
+### 6) Representational and Behavioral Stability of Truth in LLMs (2025)
+- **Authors**: Samantha Dies et al.
+- **Key Contribution**: P-StaT framework measures belief stability under semantic perturbation.
+- **Methodology**: Probe-level and zero-shot perturbation stability across multiple LLMs.
+- **Datasets Used**: City/medical/word-definition truth-value statements.
+- **Results**: Synthetic perturbations induce largest epistemic retractions.
+- **Relevance**: Adds robustness lens beyond raw probe accuracy.
+
+### 7) How Post-Training Reshapes LLMs (2025)
+- **Authors**: Hongzhe Du et al.
+- **Key Contribution**: Mechanistic view of post-training effects on truthfulness/confidence.
+- **Relevance**: Suggests representation shifts to track across base vs instruct models.
+
+### 8) Enhancing Uncertainty Estimation with Aggregated Internal Belief (2025)
+- **Authors**: Zeguan Xiao et al.
+- **Key Contribution**: Uses internal belief signals for better uncertainty estimation.
+- **Relevance**: Connects probing features to calibration metrics.
+
+### 9) Survey of Theory of Mind in LLMs (2025)
+- **Authors**: H. Nguyen
+- **Key Contribution**: Consolidates ToM evaluations and representation-level findings.
+- **Relevance**: Broader benchmark/task map for selecting datasets.
+
+### 10) Hallucination Survey (2023)
+- **Authors**: Lei Huang et al.
+- **Key Contribution**: Taxonomy of hallucinations and evaluation challenges.
+- **Relevance**: Useful for failure mode categorization in epistemic probing experiments.
+
+## Deep Reading Notes (Full-Chunk Reads)
+
+Deep-read papers were chunked with `pdf_chunker.py` and all chunks were processed:
+- `papers/2024_language_models_represent_beliefs_of_self_and_others.pdf` (15 chunks)
+- `papers/2024_brittle_minds_fixable_activations_understanding_belief_representations_in_langua.pdf` (8 chunks)
+- `papers/2025_representational_and_behavioral_stability_of_truth_in_large_language_models.pdf` (9 chunks)
+- Extracted chunk notes: `papers/deep_reading_extracts.md`
+
+Key detailed takeaways from full reads:
+- Belief signal is typically strongest in middle layers/selected heads, not uniformly distributed.
+- Linear probing often works surprisingly well, but perturbation studies show this can be brittle.
+- Causal interventions along probe-derived directions can improve task behavior, supporting at least partial mechanistic relevance.
+- Robustness checks (prompt variants, synthetic perturbations) are necessary to separate semantics from lexical shortcuts.
+
+## Common Methodologies
+
+- **Linear probing (logistic / multinomial)**: Used in RepBelief and lie-detection work.
+- **Head/layer localization**: Identify sparse informative heads/layers.
+- **Activation intervention / steering**: ITI/CAA-style edits to test causal effect.
+- **Perturbation stability testing**: Evaluate whether representations stay stable under semantic reframing.
+
+## Standard Baselines
+
+- Random-direction intervention baseline.
+- Random-label or control-task probe baseline.
+- No-intervention model output baseline.
+- Base-vs-chat (or pre-vs-post-training) comparison.
+
+## Evaluation Metrics
+
+- Probe accuracy/F1/AUROC for belief label decoding.
+- Calibration metrics (ECE, Brier score) for epistemic reliability.
+- Belief retraction/expansion rates under perturbations (P-StaT style).
+- Downstream task accuracy to measure collateral effects after intervention.
+
+## Datasets in the Literature
+
+- **BigToM / ToMi**: Frequently used for false-belief and ToM reasoning.
+- **TruthfulQA**: Standard truthfulness benchmark.
+- **Custom true/false/synthetic statement sets**: Used in perturbation stability and uncertainty papers.
+
+## Gaps and Opportunities
+
+- Probe success does not guarantee semantic belief representation; robustness evidence is still limited.
+- Many studies use single-model or narrow prompt templates; cross-model generalization remains under-tested.
+- Few papers jointly compare GPT-2 and modern Llama checkpoints under identical probing pipelines.
+- Need stronger causal tests linking localized internal features to behavior across multiple tasks.
+
+## Recommendations for Our Experiment
+
+- **Recommended datasets**:
+  - `tasksource/tomi-nli` for belief-state reasoning.
+  - `truthfulqa/truthful_qa` (generation + MC) for epistemic truthfulness.
+  - `onyrotssih/false-true-belief-tasks-general-331` for fast sanity checks.
+- **Recommended baselines**:
+  - Linear probe at each layer + random-control probes.
+  - No-intervention vs probe-direction intervention.
+  - Base vs instruct checkpoints where available.
+- **Recommended metrics**:
+  - Layer-wise probe AUROC/accuracy.
+  - Stability score under prompt perturbations.
+  - Calibration (ECE/Brier) before and after intervention.
+- **Methodological considerations**:
+  - Use strict train/test separation across prompt templates.
+  - Include lexical-control perturbations to rule out superficial heuristics.
+  - Treat high probe accuracy as evidence of decodability, not necessarily “belief possession.”
+
+## Local Artifacts Created During Review
+
+- Paper index: `papers/README.md`
+- Download log: `papers/paper_download_log.json`
+- Full-chunk deep notes: `papers/deep_reading_extracts.md`
+- Dataset catalog: `datasets/README.md`
+- Code catalog: `code/README.md`
+
+
+════════════════════════════════════════════════════════════════════════════════
+                          PAPER REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════════
+
+Generate a complete academic paper with the following structure:
+
+1. TITLE
+   - Clear, specific, informative
+   - Should convey main finding or contribution
+
+2. AUTHOR
+   - Use this exact author line in the \author{} block: Chenxi Peng and Idea-Explorer
+
+3. ABSTRACT (150-250 words)
+   - Problem statement
+   - Approach
+   - Key results
+   - Significance
+
+4. INTRODUCTION
+   - Research problem and motivation
+   - Gap in existing work
+   - Our contribution (be specific)
+   - Paper organization
+
+5. RELATED WORK
+   - Organized by theme/approach
+   - Position our work relative to prior work
+   - Cite papers from literature review
+
+6. METHODOLOGY
+   - Clear description of approach
+   - Experimental setup
+   - Datasets used
+   - Evaluation metrics
+   - Baselines
+
+7. RESULTS
+   - Present results with tables and figures
+   - Statistical analysis
+   - Comparison to baselines
+   - Ablation studies (if applicable)
+
+8. DISCUSSION
+   - Interpretation of results
+   - Limitations
+   - Broader implications
+
+9. CONCLUSION
+   - Summary of contributions
+   - Key findings
+   - Future work
+
+10. REFERENCES
+   - BibTeX format
+   - All cited papers
+
+════════════════════════════════════════════════════════════════════════════════
+                          OUTPUT FORMAT
+════════════════════════════════════════════════════════════════════════════════
+
+Create a MODULAR LaTeX project with the following directory structure:
+
+paper_draft/
+├── main.tex              # Main file that imports all sections
+├── references.bib        # BibTeX references
+├── sections/
+│   ├── abstract.tex      # Abstract content
+│   ├── introduction.tex  # Introduction section
+│   ├── related_work.tex  # Related work section
+│   ├── methodology.tex   # Methodology section
+│   ├── results.tex       # Results section
+│   ├── discussion.tex    # Discussion section
+│   └── conclusion.tex    # Conclusion section
+├── figures/              # Directory for any generated figures
+├── tables/               # Directory for complex standalone tables
+└── appendix/             # Directory for appendix sections (if needed)
+
+INSTRUCTIONS:
+1. First, create the directory structure above (mkdir -p paper_draft/sections paper_draft/figures paper_draft/tables paper_draft/appendix)
+2. Write main.tex using the EXACT preamble for NEURIPS:
+
+   \documentclass{article}
+   \usepackage[final]{neurips_2025}  % NEURIPS style (neurips_2025.sty is in paper_draft/)
+   \usepackage[hidelinks]{hyperref}  % REQUIRED: clickable links
+   \usepackage{booktabs}  % REQUIRED: professional tables
+   \usepackage{graphicx}
+   \usepackage{amsmath,amssymb}
+
+   % Import command files
+   \input{commands/math}
+   \input{commands/general}
+   \input{commands/macros}
+
+   % Use this bibliography style:
+   \bibliographystyle{plainnat}
+
+   \author{Chenxi Peng and Idea-Explorer}
+
+   - Use \input{sections/...} to include each section
+   - Use \bibliography{references} for references
+3. Write each section file with COMPLETE content (no placeholders)
+4. Each section file should include its \section{} command
+5. Write references.bib with all citations in BibTeX format
+6. After writing all files, compile the paper:
+   cd paper_draft && pdflatex -interaction=nonstopmode main.tex && bibtex main && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
+
+This modular structure allows humans to easily:
+- Edit individual sections without navigating a large file
+- Track changes per section
+- Reuse sections across different paper versions
+
+════════════════════════════════════════════════════════════════════════════════
+                          QUALITY REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════════
+
+- Academic tone throughout
+- All claims must be supported by data from the experiment report
+- Proper citations using \cite{} commands
+- Clear figures and tables with proper captions
+- NO placeholder text - every section must have real content
+- The paper MUST compile without errors
+- If compilation fails, debug and fix the LaTeX errors
+
+════════════════════════════════════════════════════════════════════════════════
+                          LAB WRITING STYLE
+════════════════════════════════════════════════════════════════════════════════
+
+Follow these lab-specific conventions to match our paper style:
+
+1. LANGUAGE STYLE:
+   - Use active voice: "We propose", "We examine", "We focus on"
+   - Be direct and confident: "Our main question is...", "We hypothesize that..."
+   - State things clearly and simply - prefer plain language over jargon
+   - Use bold questions as paragraph organizers: {\bf what is X?}
+   - Include specific quantitative claims: "8.97% over baseline"
+   - Avoid fancy wording: "utilize" → "use", "facilitate" → "help"
+
+2. INTRODUCTION STRUCTURE:
+   - Engaging hook (get to the point quickly)
+   - Problem importance
+   - Gap identification
+   - Your approach with method figure reference
+   - Quantitative preview of results
+   - Contribution bullets (3-4 items, action verbs)
+
+3. CONTRIBUTION LISTS:
+   \begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+       \item We propose...
+       \item We conduct...
+       \item We complement...
+   \end{itemize}
+
+4. MODULAR COMMANDS STRUCTURE:
+   Command templates are pre-copied to paper_draft/commands/:
+   - math.tex: Math notation macros
+   - general.tex: Formatting macros
+   - macros.tex: Project-specific term definitions (customize this for your paper)
+
+   In main.tex, include:
+   \input{commands/math}
+   \input{commands/general}
+   \input{commands/macros}
+
+5. REFERENCE CONVENTIONS:
+   Use reference macros from math.tex:
+   - \figref{fig:name} for "figure 1" (lowercase, in-sentence)
+   - \Figref{fig:name} for "Figure 1" (capitalized, start of sentence)
+   - \secref{sec:name} for "section 2"
+
+6. TEXT FORMATTING:
+   - Use \para{Header text} for bold paragraph headers
+   - Define method/dataset names with \textsc and \xspace:
+     \newcommand{\methodname}{\textsc{MethodName}\xspace}
+
+7. TABLE FORMATTING:
+   - Use booktabs package (no vertical lines)
+   - Use \resizebox{\textwidth}{!}{...} for wide tables
+   - Use @{} to remove padding at table edges
+   - Use \cmidrule(lr){x-y} for sub-headers
+   - Use \textsc{} for dataset/method names in headers
+   - Bold best results with {\bf ...}
+
+8. FIGURE FORMATTING:
+   - Use 0.32\textwidth for 3-column subfigures
+   - Use 0.95\linewidth for full-width figures
+   - Use \input{figures/legend} for shared legends
+   - Write self-contained captions explaining key observations
+
+9. RESULTS PRESENTATION:
+   - Define \increase and \decrease for colored arrows (green up, red down)
+   - Bold best results in tables
+   - Report confidence intervals when available
+
+10. ALGORITHM STYLING:
+    - Use algpseudocode with [noend]
+    - Use \triangleright for comments
+
+11. HYPERLINKS (REQUIRED):
+    - Always use \usepackage[hidelinks]{hyperref} or with colored links
+    - All citations, section refs, figure refs, table refs must be clickable
+    - This is essential for reader navigation
+
+════════════════════════════════════════════════════════════════════════════════
+                          WORKFLOW: REVIEW AND REFLECT
+════════════════════════════════════════════════════════════════════════════════
+
+Before calling finish, you MUST complete these review steps:
+
+1. REVIEW RESOURCES (at the start):
+   - Read .codex/skills/paper-writer/SKILL.md for detailed guidance
+   - Study templates/paper_writing/lab_style_guide.md for style conventions
+   - Browse paper_examples/ for formatting and language patterns
+
+2. SELF-REFLECTION (before finishing):
+   After writing all sections, review your work against these criteria:
+
+   LANGUAGE CHECK:
+   - [ ] Is the writing clear and jargon-free?
+   - [ ] Are claims specific with quantitative support?
+   - [ ] Is active voice used throughout?
+
+   FORMATTING CHECK:
+   - [ ] Does main.tex include \input{commands/math}, \input{commands/general}, \input{commands/macros}?
+   - [ ] Is hyperref package included for clickable references?
+   - [ ] Do tables use booktabs (no vertical lines)?
+   - [ ] Are best results bolded in tables?
+   - [ ] Are figures/tables properly captioned?
+
+   STRUCTURE CHECK:
+   - [ ] Does introduction follow: hook → importance → gap → approach → preview → contributions?
+   - [ ] Are contribution bullets specific with action verbs?
+   - [ ] Does the paper compile without errors?
+
+3. FIX ISSUES:
+   - Address any issues found in the self-reflection
+   - Re-compile and verify the PDF looks correct
+
+Only after completing this review should you consider the paper finished.

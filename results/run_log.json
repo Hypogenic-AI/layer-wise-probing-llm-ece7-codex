@@ -1,0 +1,35 @@
+[
+  {
+    "model": "gpt2",
+    "status": "loaded",
+    "num_layers": 12,
+    "hidden_size": 768,
+    "batch_size": 64
+  },
+  {
+    "model": "gpt2",
+    "elapsed_sec": 28.05455732345581
+  },
+  {
+    "model": "gpt2_medium",
+    "status": "loaded",
+    "num_layers": 24,
+    "hidden_size": 1024,
+    "batch_size": 64
+  },
+  {
+    "model": "gpt2_medium",
+    "elapsed_sec": 71.74474096298218
+  },
+  {
+    "model": "llama7b",
+    "status": "loaded",
+    "num_layers": 32,
+    "hidden_size": 4096,
+    "batch_size": 16
+  },
+  {
+    "model": "llama7b",
+    "elapsed_sec": 551.046932220459
+  }
+]

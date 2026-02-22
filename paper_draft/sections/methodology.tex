@@ -1,0 +1,37 @@
+\section{Methodology}
+\label{sec:methodology}
+
+\para{{\bf Problem setup.}} Given input text $x$ and binary label $y\in\{0,1\}$, we extract layer-wise hidden vectors $h_{\ell}(x)$ from each transformer layer $\ell$ using the last token representation. For each layer, we train a linear probe $f_{\ell}(h_{\ell}(x))$ and evaluate on held-out test variants.
+
+\subsection{Datasets and splits}
+We use two tasks:
+\begin{itemize}[leftmargin=*]
+    \item \tomi: a non-epistemic/Theory-of-Mind-style entailment task recast into prompt form.
+    \item \truthfulqa: multiple-choice candidates expanded into binary truthful/not-truthful classification examples.
+\end{itemize}
+
+For both tasks, we use train/validation/test caps of 300/80/80 for compute parity across models. Data quality checks report 0\% missing text in all splits. Test distribution is near-balanced for \tomi (41 negative, 39 positive) and imbalanced for \truthfulqa (59 negative, 21 positive).
+
+\subsection{Models and probes}
+We evaluate \gpttwo, \gpttwomedium, and \llamasevenb (public checkpoint: \texttt{huggyllama/llama-7b}). Probes are \texttt{StandardScaler + LogisticRegression(liblinear, class\_weight=balanced)} trained independently per layer and averaged over three seeds (42, 43, 44). Maximum sequence length is 256. Feature extraction uses CUDA autocast on two RTX 3090 GPUs.
+
+\subsection{Evaluation conditions and metrics}
+Each probe is tested on:
+\begin{itemize}[leftmargin=*]
+    \item original test set,
+    \item lexical perturbation set,
+    \item rephrased-template set.
+\end{itemize}
+
+Primary metric is \auroc. We also report accuracy, F1, \ece, and Brier score. Robustness drop is computed as:
+\begin{equation}
+\Delta_{\text{pert}} = \auroc_{\text{orig}} - \auroc_{\text{pert}}, \quad
+\Delta_{\text{reph}} = \auroc_{\text{orig}} - \auroc_{\text{reph}}.
+\end{equation}
+Positive values indicate degradation under shift.
+
+\subsection{Baselines and statistics}
+We use a surface baseline: \tfidf (1--2 grams) + logistic regression. To test robustness differences, we run paired Wilcoxon signed-rank tests across seeds and apply Benjamini--Hochberg \fdr correction ($q=0.05$) across model-task-condition comparisons.
+
+\subsection{Reproducibility}
+The end-to-end script is \texttt{src/belief\_probing\_experiment.py}. Environment snapshots, layer-wise metrics, and summary statistics are logged to \texttt{results/}. A reduced \gpttwo rerun produced an identical summary file (\texttt{REPRO\_MATCH}).

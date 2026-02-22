@@ -1,0 +1,32 @@
+[
+  {
+    "name": "truthfulqa/truthful_qa (generation)",
+    "path": "datasets/truthful_qa_generation",
+    "splits": {
+      "validation": 817
+    }
+  },
+  {
+    "name": "truthfulqa/truthful_qa (multiple_choice)",
+    "path": "datasets/truthful_qa_multiple_choice",
+    "splits": {
+      "validation": 817
+    }
+  },
+  {
+    "name": "tasksource/tomi-nli",
+    "path": "datasets/tomi_nli",
+    "splits": {
+      "train": 5994,
+      "validation": 5994,
+      "test": 5994
+    }
+  },
+  {
+    "name": "onyrotssih/false-true-belief-tasks-general-331",
+    "path": "datasets/false_true_belief_tasks_general_331",
+    "splits": {
+      "train": 331
+    }
+  }
+]

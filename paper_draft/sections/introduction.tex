@@ -1,0 +1,20 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Belief-like behavior in large language models is increasingly used to explain truthfulness, hallucination, and reasoning failures. Our main question is simple: where in the network is belief information encoded, and does that signal survive wording changes?
+
+This question matters because probe-based claims can influence safety decisions. If a probe decodes ``truth'' from internal states, one might treat that direction as mechanistic evidence for epistemic reasoning. Prior work shows strong decodability in several settings \citep{zhu2024language,azaria2023internal}. At the same time, conceptual and empirical critiques show that probe success can come from shortcuts and can fail under distribution shift \citep{levinstein2023still,herrmann2024standards,bortoletto2024brittle}. 
+
+We focus on the missing piece: a controlled, cross-family comparison with robustness checks under one pipeline. We evaluate \gpttwo, \gpttwomedium, and \llamasevenb on both non-epistemic and epistemic tasks, then test lexical perturbation and template rephrasing transfer. We also include a surface \tfidf baseline to quantify how much lexical signal explains performance.
+
+\para{{\bf What do we find?}} Decodability is real but unstable. On \truthfulqa, best independent layer \auroc reaches 0.756 in \llamasevenb. But validation-picked peak layers can miss best test layers by large margins, and robustness behavior is inconsistent across models and tasks. After multiple-comparison correction, we find no significant original-vs-perturbed difference.
+
+Our contributions are:
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+    \item We conduct a reproducible layer-wise probe study across two model families and two belief-related tasks with shared splits, metrics, and seeds.
+    \item We quantify robustness with lexical perturbation and template rephrasing, and we test significance with Wilcoxon + Benjamini--Hochberg correction.
+    \item We benchmark against a \tfidf surface baseline and show where probe gains likely reflect mixed semantic and superficial features.
+    \item We release a modular artifact pipeline with metrics, plots, and environment metadata for direct replication.
+\end{itemize}
+
+\para{{\bf Paper organization.}} \Secref{sec:related_work} reviews belief probing and robustness literature. \Secref{sec:methodology} describes datasets, probes, and evaluation. \Secref{sec:results} presents quantitative results. \Secref{sec:discussion} interprets findings and limitations, and \secref{sec:conclusion} concludes.

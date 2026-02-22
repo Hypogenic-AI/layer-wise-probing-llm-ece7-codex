@@ -1,0 +1,7 @@
+model,task,peak_layer,surface_baseline_auroc,surface_baseline_acc
+gpt2,tomi_nli,5,0.5684803001876173,0.5375
+gpt2,truthfulqa_mc,1,0.5262308313155771,0.7625
+gpt2_medium,tomi_nli,10,0.5684803001876173,0.5375
+gpt2_medium,truthfulqa_mc,10,0.5262308313155771,0.7625
+llama7b,tomi_nli,13,0.5684803001876173,0.5375
+llama7b,truthfulqa_mc,9,0.5262308313155771,0.7625

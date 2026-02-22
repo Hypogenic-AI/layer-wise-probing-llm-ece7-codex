@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Task & Peak Layer (val) & Test \auroc & Perturbed \auroc & Rephrased \auroc & Surface \tfidf \auroc \\
+\midrule
+\gpttwo & \tomi & 5  & 0.447 & {\bf 0.644} & 0.500 & 0.568 \\
+\gpttwo & \truthfulqa & 1 & 0.609 & 0.605 & 0.486 & 0.526 \\
+\gpttwomedium & \tomi & 10 & 0.438 & 0.477 & {\bf 0.531} & 0.568 \\
+\gpttwomedium & \truthfulqa & 10 & 0.617 & 0.576 & 0.531 & 0.526 \\
+\llamasevenb & \tomi & 13 & {\bf 0.551} & 0.456 & 0.483 & {\bf 0.568} \\
+\llamasevenb & \truthfulqa & 9 & {\bf 0.639} & {\bf 0.693} & 0.498 & 0.526 \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Validation-selected peak-layer performance. We report mean values over three seeds. Bold marks the best value within each model-task row across original/perturbed/rephrased hidden-state evaluations, and best between hidden-state test AUROC and surface baseline where relevant.}
+\label{tab:peak_results}
+\end{table*}

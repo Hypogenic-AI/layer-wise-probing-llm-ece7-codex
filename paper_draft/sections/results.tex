@@ -1,0 +1,29 @@
+\section{Results}
+\label{sec:results}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/layerwise_val_auroc.png}
+    \caption{Layer-wise validation \auroc curves across models and tasks. Curves show non-monotonic structure with task-dependent peaks, supporting layer localization but also indicating selection instability.}
+    \label{fig:layerwise_val}
+\end{figure*}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/perturbation_drop.png}
+    \caption{Robustness drop ($\Delta$\auroc) for perturbation and rephrasing. Mixed signs indicate that some perturbations simplify classification boundaries while others degrade performance.}
+    \label{fig:drop}
+\end{figure}
+
+\input{tables/main_results}
+\input{tables/best_layer_results}
+
+\para{{\bf Main quantitative findings.}} \Tabref{tab:peak_results} summarizes validation-selected layers. On \truthfulqa, hidden-state probes outperform the surface baseline in all models on original test data (e.g., 0.639 vs 0.526 for \llamasevenb). On \tomi, gains are limited: the baseline \auroc is 0.568, above most validation-selected probe results.
+
+\para{{\bf Best-layer behavior.}} \Tabref{tab:best_layers} shows independent best test-layer values. Later layers in larger models yield stronger epistemic decodability, with \llamasevenb reaching 0.756 on \truthfulqa. However, this does not imply stable model selection because those layers are not always chosen by validation.
+
+\para{{\bf Robustness and significance.}} We test original-vs-shifted performance using Wilcoxon signed-rank tests with Benjamini--Hochberg correction. No comparison is significant at $q<0.05$; all corrected p-values satisfy $p_{\mathrm{adj}}\geq 0.1875$. Effect sizes are near zero under this deterministic probe regime, limiting inferential strength.
+
+\para{{\bf Comparison to lexical baseline.}} The \tfidf baseline reaches 0.568 \auroc on \tomi and 0.526 on \truthfulqa. This baseline is competitive on \tomi and much weaker than best-layer \truthfulqa probes, supporting a mixed picture: stronger latent decodability for epistemic labels but substantial shortcut potential for non-epistemic labels.
+
+\para{{\bf Calibration trends.}} Across layers (from \texttt{results/layerwise\_metrics.csv}), calibration metrics vary with decodability. High \auroc layers do not consistently minimize \ece/Brier, indicating that representation separability and probability calibration are partly decoupled.

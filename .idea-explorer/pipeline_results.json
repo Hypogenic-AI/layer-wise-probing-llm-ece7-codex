@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "stages": {
+    "resource_finder": {
+      "success": true,
+      "completion_marker": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/.resource_finder_complete",
+      "outputs": {
+        "literature_review": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/literature_review.md",
+        "resources_catalog": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/resources.md",
+        "papers_dir": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/papers",
+        "datasets_dir": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/datasets",
+        "code_dir": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/code"
+      },
+      "log_file": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/logs/resource_finder_codex.log",
+      "transcript_file": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/logs/resource_finder_codex_transcript.jsonl",
+      "elapsed_time": 432.17761039733887
+    },
+    "experiment_runner": {
+      "success": true,
+      "return_code": 0,
+      "elapsed_time": 3234.765627861023,
+      "log_file": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/logs/execution_codex.log",
+      "transcript_file": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex/logs/execution_codex_transcript.jsonl"
+    }
+  },
+  "work_dir": "/data/hypogenicai/workspaces/layer-wise-probing-llm-ece7-codex"
+}

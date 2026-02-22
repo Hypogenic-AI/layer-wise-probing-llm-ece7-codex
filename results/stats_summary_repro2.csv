@@ -1,0 +1,3 @@
+model,task,peak_layer,test_auroc_mean,pert_auroc_mean,reph_auroc_mean,auroc_drop_pert,auroc_drop_reph,p_wilcoxon_pert,p_wilcoxon_reph,d_pert,d_reph,p_wilcoxon_pert_fdr,p_wilcoxon_reph_fdr
+gpt2,tomi_nli,8,0.6944444444444443,0.6744791666666666,0.5176767676767677,0.01996527777777768,0.17676767676767668,0.125,0.125,0.0,0.0,0.125,0.125
+gpt2,truthfulqa_mc,10,0.521978021978022,0.5054945054945055,0.5082417582417582,0.016483516483516536,0.013736263736263798,0.125,0.125,0.0,0.0,0.125,0.125

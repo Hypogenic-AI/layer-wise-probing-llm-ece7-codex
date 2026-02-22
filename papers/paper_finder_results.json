@@ -1,0 +1,636 @@
+{
+  "success": true,
+  "total": 70,
+  "papers": [
+    {
+      "title": "Language Models Represent Beliefs of Self and Others",
+      "year": 2024,
+      "authors": "Wentao Zhu, Zhining Zhang, Yizhou Wang",
+      "url": "https://api.semanticscholar.org/CorpusId:268041304",
+      "relevance": 3,
+      "abstract": "Understanding and attributing mental states, known as Theory of Mind (ToM), emerges as a fundamental capability for human social reasoning. While Large Language Models (LLMs) appear to possess certain ToM abilities, the mechanisms underlying these capabilities remain elusive. In this study, we discover that it is possible to linearly decode the belief status from the perspectives of various agents through neural activations of language models, indicating the existence of internal representations of self and others' beliefs. By manipulating these representations, we observe dramatic changes in the models' ToM performance, underscoring their pivotal role in the social reasoning process. Additionally, our findings extend to diverse social reasoning tasks that involve different causal inference patterns, suggesting the potential generalizability of these representations.",
+      "citations": 16
+    },
+    {
+      "title": "Representational and Behavioral Stability of Truth in Large Language Models",
+      "year": 2025,
+      "authors": "Samantha Dies, Courtney Maynard, Germans Savcisens, Tina Eliassi-Rad",
+      "url": "https://api.semanticscholar.org/CorpusId:283244203",
+      "relevance": 3,
+      "abstract": "Large language models (LLMs) are increasingly used as information sources, yet small changes in semantic framing can destabilize their truth judgments. We propose P-StaT (Perturbation Stability of Truth), an evaluation framework for testing belief stability under controlled semantic perturbations in representational and behavioral settings via probing and zero-shot prompting. Across sixteen open-source LLMs and three domains, we compare perturbations involving epistemically familiar Neither statements drawn from well-known fictional contexts (Fictional) to those involving unfamiliar Neither statements not seen in training data (Synthetic). We find a consistent stability hierarchy: Synthetic content aligns closely with factual representations and induces the largest retractions of previously held beliefs, producing up to $32.7\\%$ retractions in representational evaluations and up to $36.3\\%$ in behavioral evaluations. By contrast, Fictional content is more representationally distinct and comparatively stable. Together, these results suggest that epistemic familiarity is a robust signal across instantiations of belief stability under semantic reframing, complementing accuracy-based factuality evaluation with a notion of epistemic robustness.",
+      "citations": 0
+    },
+    {
+      "title": "A Survey of Theory of Mind in Large Language Models: Evaluations, Representations, and Safety Risks",
+      "year": 2025,
+      "authors": "H. Nguyen",
+      "url": "https://api.semanticscholar.org/CorpusId:276250539",
+      "relevance": 3,
+      "abstract": "Theory of Mind (ToM), the ability to attribute mental states to others and predict their behaviour, is fundamental to social intelligence. In this paper, we survey studies evaluating behavioural and representational ToM in Large Language Models (LLMs), identify important safety risks from advanced LLM ToM capabilities, and suggest several research directions for effective evaluation and mitigation of these risks.",
+      "citations": 5
+    },
+    {
+      "title": "Brittle Minds, Fixable Activations: Understanding Belief Representations in Language Models",
+      "year": 2024,
+      "authors": "Matteo Bortoletto, Constantin Ruhdorfer, Lei Shi, Andreas Bulling",
+      "url": "https://www.semanticscholar.org/paper/d6bd903ccfa66a08c73a8c01d54d4d133246d6fe",
+      "relevance": 3,
+      "abstract": "Despite growing interest in Theory of Mind (ToM) tasks for evaluating language models (LMs), little is known about how LMs internally represent mental states of self and others. Understanding these internal mechanisms is critical - not only to move beyond surface-level performance, but also for model alignment and safety, where subtle misattributions of mental states may go undetected in generated outputs. In this work, we present the first systematic investigation of belief representations in LMs by probing models across different scales, training regimens, and prompts - using control tasks to rule out confounds. Our experiments provide evidence that both model size and fine-tuning substantially improve LMs' internal representations of others' beliefs, which are structured - not mere by-products of spurious correlations - yet brittle to prompt variations. Crucially, we show that these representations can be strengthened: targeted edits to model activations can correct wrong ToM inferences.",
+      "citations": 4
+    },
+    {
+      "title": "Truth-value judgment in language models:'truth directions'are context sensitive",
+      "year": 2024,
+      "authors": "Stefan F. Schouten, Peter Bloem, Ilia Markov, Piek Vossen",
+      "url": "https://api.semanticscholar.org/CorpusId:280137568",
+      "relevance": 3,
+      "abstract": "Recent work has demonstrated that the latent spaces of large language models (LLMs) contain directions predictive of the truth of sentences. Multiple methods recover such directions and build probes that are described as uncovering a model's\"knowledge\"or\"beliefs\". We investigate this phenomenon, looking closely at the impact of context on the probes. Our experiments establish where in the LLM the probe's predictions are (most) sensitive to the presence of related sentences, and how to best characterize this kind of sensitivity. We do so by measuring different types of consistency errors that occur after probing an LLM whose inputs consist of hypotheses preceded by (negated) supporting and contradicting sentences. We also perform a causal intervention experiment, investigating whether moving the representation of a premise along these truth-value directions influences the position of an entailed or contradicted sentence along that same direction. We find that the probes we test are generally context sensitive, but that contexts which should not affect the truth often still impact the probe outputs. Our experiments show that the type of errors depend on the layer, the model, and the kind of data. Finally, our results suggest that truth-value directions are causal mediators in the inference process that incorporates in-context information.",
+      "citations": 2
+    },
+    {
+      "title": "How Post-Training Reshapes LLMs: A Mechanistic View on Knowledge, Truthfulness, Refusal, and Confidence",
+      "year": 2025,
+      "authors": "Hongzhe Du, Weikai Li, Min Cai, Karim Saraipour, Zimin Zhang, Himabindu Lakkaraju, Yizhou Sun, Shichang Zhang",
+      "url": "https://api.semanticscholar.org/CorpusId:277596203",
+      "relevance": 3,
+      "abstract": "Post-training is essential for the success of large language models (LLMs), transforming pre-trained base models into more useful and aligned post-trained models. While plenty of works have studied post-training algorithms and evaluated post-training models by their outputs, it remains understudied how post-training reshapes LLMs internally. In this paper, we compare base and post-trained LLMs mechanistically from four perspectives to better understand post-training effects. Our findings across model families and datasets reveal that: (1) Post-training does not change the factual knowledge storage locations, and it adapts knowledge representations from the base model while developing new knowledge representations; (2) Both truthfulness and refusal can be represented by vectors in the hidden representation space. The truthfulness direction is highly similar between the base and post-trained model, and it is effectively transferable for interventions; (3) The refusal direction is different between the base and post-trained models, and it shows limited forward transferability; (4) Differences in confidence between the base and post-trained models cannot be attributed to entropy neurons. Our study provides insights into the fundamental mechanisms preserved and altered during post-training, facilitates downstream tasks like model steering, and could potentially benefit future research in interpretability and LLM post-training. Our code is publicly available at https://github.com/HZD01/post-training-mechanistic-analysis.",
+      "citations": 5
+    },
+    {
+      "title": "Enhancing Uncertainty Estimation in LLMs with Expectation of Aggregated Internal Belief",
+      "year": 2025,
+      "authors": "Zeguan Xiao, Diyang Dou, Boya Xiong, Yun Chen, Guanhua Chen",
+      "url": "https://api.semanticscholar.org/CorpusId:281080475",
+      "relevance": 3,
+      "abstract": "Large Language Models (LLMs) have achieved remarkable success across a wide range of natural language tasks, but often exhibit overconfidence and generate plausible yet incorrect answers. This overconfidence, especially in models undergone Reinforcement Learning from Human Feedback (RLHF), poses significant challenges for reliable uncertainty estimation and safe deployment. In this paper, we propose EAGLE (Expectation of AGgregated internaL bEief), a novel self-evaluation-based calibration method that leverages the internal hidden states of LLMs to derive more accurate confidence scores. Instead of relying on the model's final output, our approach extracts internal beliefs from multiple intermediate layers during self-evaluation. By aggregating these layer-wise beliefs and calculating the expectation over the resulting confidence score distribution, EAGLE produces a refined confidence score that more faithfully reflects the model's internal certainty. Extensive experiments on diverse datasets and LLMs demonstrate that EAGLE significantly improves calibration performance over existing baselines. We also provide an in-depth analysis of EAGLE, including a layer-wise examination of uncertainty patterns, a study of the impact of self-evaluation prompts, and an analysis of the effect of self-evaluation score range.",
+      "citations": 0
+    },
+    {
+      "title": "The Internal State of an LLM Knows When its Lying",
+      "year": 2023,
+      "authors": "A. Azaria, Tom M. Mitchell",
+      "url": "https://www.semanticscholar.org/paper/f406aceba4f29cc7cfbe7edb2f52f01374486589",
+      "relevance": 2,
+      "abstract": "While Large Language Models (LLMs) have shown exceptional performance in various tasks, one of their most prominent drawbacks is generating inaccurate or false information with a confident tone. In this paper, we provide evidence that the LLM's internal state can be used to reveal the truthfulness of statements. This includes both statements provided to the LLM, and statements that the LLM itself generates. Our approach is to train a classifier that outputs the probability that a statement is truthful, based on the hidden layer activations of the LLM as it reads or generates the statement. Experiments demonstrate that given a set of test sentences, of which half are true and half false, our trained classifier achieves an average of 71\\% to 83\\% accuracy labeling which sentences are true versus false, depending on the LLM base model. Furthermore, we explore the relationship between our classifier's performance and approaches based on the probability assigned to the sentence by the LLM. We show that while LLM-assigned sentence probability is related to sentence truthfulness, this probability is also dependent on sentence length and the frequencies of words in the sentence, resulting in our trained classifier providing a more reliable approach to detecting truthfulness, highlighting its potential to enhance the reliability of LLM-generated content and its practical applicability in real-world scenarios.",
+      "citations": 527
+    },
+    {
+      "title": "Still no lie detector for language models: probing empirical and conceptual roadblocks",
+      "year": 2023,
+      "authors": "B. A. Levinstein, Daniel A. Herrmann",
+      "url": "https://api.semanticscholar.org/CorpusId:259316868",
+      "relevance": 2,
+      "abstract": "We consider the questions of whether or not large language models (LLMs) have beliefs, and, if they do, how we might measure them. First, we consider whether or not we should expect LLMs to have something like beliefs in the first place. We consider some recent arguments aiming to show that LLMs cannot have beliefs. We show that these arguments are misguided. We provide a more productive framing of questions surrounding the status of beliefs in LLMs, and highlight the empirical nature of the problem. With this lesson in hand, we evaluate two existing approaches for measuring the beliefs of LLMs, one due to Azaria and Mitchell (The internal state of an llm knows when its lying, 2023) and the other to Burns et al. (Discovering latent knowledge in language models without supervision, 2022). Moving from the armchair to the desk chair, we provide empirical results that show that these methods fail to generalize in very basic ways. We then argue that, even if LLMs have beliefs, these methods are unlikely to be successful for conceptual reasons. Thus, there is still no lie-detector for LLMs. We conclude by suggesting some concrete paths for future work.",
+      "citations": 85
+    },
+    {
+      "title": "Improving Preference Extraction In LLMs By Identifying Latent Knowledge Through Classifying Probes",
+      "year": 2025,
+      "authors": "Sharan Maiya, Yinhong Liu, Ramit Debnath, Anna Korhonen",
+      "url": "https://api.semanticscholar.org/CorpusId:277272018",
+      "relevance": 2,
+      "abstract": "Large Language Models (LLMs) are often used as automated judges to evaluate text, but their effectiveness can be hindered by various unintentional biases. We propose using linear classifying probes, trained by leveraging differences between contrasting pairs of prompts, to directly access LLMs' latent knowledge and extract more accurate preferences. Through extensive experiments using models of varying size from four different families and six diverse datasets assessing text quality evaluation and common sense reasoning, we demonstrate that both supervised and unsupervised probing approaches consistently outperform traditional generation-based judgement while maintaining similar computational costs. These probes generalise under domain shifts and can even outperform finetuned evaluators with the same training data size. Our results suggest linear probing offers an accurate, robust and computationally efficient approach for LLM-as-judge tasks while providing interpretable insights into how models encode judgement-relevant knowledge. Our data and code will be openly released in the future.",
+      "citations": 4
+    },
+    {
+      "title": "Standards for Belief Representations in LLMs",
+      "year": 2024,
+      "authors": "Daniel A. Herrmann, B. A. Levinstein",
+      "url": "https://api.semanticscholar.org/CorpusId:270199407",
+      "relevance": 2,
+      "abstract": "As large language models (LLMs) continue to demonstrate remarkable abilities across various domains, computer scientists are developing methods to understand their cognitive processes, particularly concerning how (and if) LLMs internally represent their beliefs about the world. However, this field currently lacks a unified theoretical foundation to underpin the study of belief in LLMs. This article begins filling this gap by proposing adequacy conditions for a representation in an LLM to count as belief-like. We argue that, while the project of belief measurement in LLMs shares striking features with belief measurement as carried out in decision theory and formal epistemology, it also differs in ways that should change how we measure belief. Thus, drawing from insights in philosophy and contemporary practices of machine learning, we establish four criteria that balance theoretical considerations with practical constraints. Our proposed criteria include accuracy, coherence, uniformity, and use, which together help lay the groundwork for a comprehensive understanding of belief representation in LLMs. We draw on empirical work showing the limitations of using various criteria in isolation to identify belief representations.",
+      "citations": 26
+    },
+    {
+      "title": "Mapping Clinical Doubt: Locating Linguistic Uncertainty in LLMs",
+      "year": 2025,
+      "authors": "Srivarshinee Sridhar, Raghav Kaushik Ravi, Kripabandhu Ghosh",
+      "url": "https://api.semanticscholar.org/CorpusId:283438747",
+      "relevance": 2,
+      "abstract": "Large Language Models (LLMs) are increasingly used in clinical settings, where sensitivity to linguistic uncertainty can influence diagnostic interpretation and decision-making. Yet little is known about where such epistemic cues are internally represented within these models. Distinct from uncertainty quantification, which measures output confidence, this work examines input-side representational sensitivity to linguistic uncertainty in medical text. We curate a contrastive dataset of clinical statements varying in epistemic modality (e.g.,'is consistent with'vs.'may be consistent with') and propose Model Sensitivity to Uncertainty (MSU), a layerwise probing metric that quantifies activation-level shifts induced by uncertainty cues. Our results show that LLMs exhibit structured, depth-dependent sensitivity to clinical uncertainty, suggesting that epistemic information is progressively encoded in deeper layers. These findings reveal how linguistic uncertainty is internally represented in LLMs, offering insight into their interpretability and epistemic reliability.",
+      "citations": 0
+    },
+    {
+      "title": "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions",
+      "year": 2023,
+      "authors": "Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian Wang, Qianglong Chen, Weihua Peng, Xiaocheng Feng, Bing Qin, Ting Liu",
+      "url": "https://api.semanticscholar.org/CorpusId:265067168",
+      "relevance": 2,
+      "abstract": "The emergence of large language models (LLMs) has marked a significant breakthrough in natural language processing (NLP), fueling a paradigm shift in information acquisition. Nevertheless, LLMs are prone to hallucination, generating plausible yet nonfactual content. This phenomenon raises significant concerns over the reliability of LLMs in real-world information retrieval (IR) systems and has attracted intensive research to detect and mitigate such hallucinations. Given the open-ended general-purpose attributes inherent to LLMs, LLM hallucinations present distinct challenges that diverge from prior task-specific models. This divergence highlights the urgency for a nuanced understanding and comprehensive overview of recent advances in LLM hallucinations. In this survey, we begin with an innovative taxonomy of hallucination in the era of LLM and then delve into the factors contributing to hallucinations. Subsequently, we present a thorough overview of hallucination detection methods and benchmarks. Our discussion then transfers to representative methodologies for mitigating LLM hallucinations. Additionally, we delve into the current limitations faced by retrieval-augmented LLMs in combating hallucinations, offering insights for developing more robust IR systems. Finally, we highlight the promising research directions on LLM hallucinations, including hallucination in large vision-language models and understanding of knowledge boundaries in LLM hallucinations.",
+      "citations": 2142
+    },
+    {
+      "title": "The Trilemma of Truth in Large Language Models",
+      "year": 2025,
+      "authors": "Germans Savcisens, Tina Eliassi-Rad",
+      "url": "https://www.semanticscholar.org/paper/995faf2c6d7443bc24e3fc340867f392137785e6",
+      "relevance": 2,
+      "abstract": "The public often attributes human-like qualities to large language models (LLMs) and assumes they\"know\"certain things. In reality, LLMs encode information retained during training as internal probabilistic knowledge. This study examines existing methods for probing the veracity of that knowledge and identifies several flawed underlying assumptions. To address these flaws, we introduce sAwMIL (Sparse-Aware Multiple-Instance Learning), a multiclass probing framework that combines multiple-instance learning with conformal prediction. sAwMIL leverages internal activations of LLMs to classify statements as true, false, or neither. We evaluate sAwMIL across 16 open-source LLMs, including default and chat-based variants, on three new curated datasets. Our results show that (1) common probing methods fail to provide a reliable and transferable veracity direction and, in some settings, perform worse than zero-shot prompting; (2) truth and falsehood are not encoded symmetrically; and (3) LLMs encode a third type of signal that is distinct from both true and false.",
+      "citations": 2
+    },
+    {
+      "title": "The Shape of Beliefs: Geometry, Dynamics, and Interventions along Representation Manifolds of Language Models'Posteriors",
+      "year": 2026,
+      "authors": "Raphael Sarfati, Eric J. Bigelow, Daniel Wurgaft, Jack Merullo, Atticus Geiger, Owen Lewis, Tom McGrath, E. Lubana",
+      "url": "https://api.semanticscholar.org/CorpusId:285270894",
+      "relevance": 2,
+      "abstract": "Large language models (LLMs) represent prompt-conditioned beliefs (posteriors over answers and claims), but we lack a mechanistic account of how these beliefs are encoded in representation space, how they update with new evidence, and how interventions reshape them. We study a controlled setting in which Llama-3.2 generates samples from a normal distribution by implicitly inferring its parameters (mean and standard deviation) given only samples from the distribution in context. We find representations of curved\"belief manifolds\"for these parameters form with sufficient in-context learning and study how the model adapts when the distribution suddenly changes. While standard linear steering often pushes the model off-manifold and induces coupled, out-of-distribution shifts, geometry and field-aware steering better preserves the intended belief family. Our work demonstrates an example of linear field probing (LFP) as a simple approach to tile the data manifold and make interventions that respect the underlying geometry. We conclude that rich structure emerges naturally in LLMs and that purely linear concept representations are often an inadequate abstraction.",
+      "citations": 0
+    },
+    {
+      "title": "Indications of Belief-Guided Agency and Meta-Cognitive Monitoring in Large Language Models",
+      "year": 2026,
+      "authors": "Noam Steinmetz Yalon, Ariel Goldstein, L. Mudrik, Mor Geva",
+      "url": "https://api.semanticscholar.org/CorpusId:285271259",
+      "relevance": 2,
+      "abstract": "Rapid advancements in large language models (LLMs) have sparked the question whether these models possess some form of consciousness. To tackle this challenge, Butlin et al. (2023) introduced a list of indicators for consciousness in artificial systems based on neuroscientific theories. In this work, we evaluate a key indicator from this list, called HOT-3, which tests for agency guided by a general belief-formation and action selection system that updates beliefs based on meta-cognitive monitoring. We view beliefs as representations in the model's latent space that emerge in response to a given input, and introduce a metric to quantify their dominance during generation. Analyzing the dynamics between competing beliefs across models and tasks reveals three key findings: (1) external manipulations systematically modulate internal belief formation, (2) belief formation causally drives the model's action selection, and (3) models can monitor and report their own belief states. Together, these results provide empirical support for the existence of belief-guided agency and meta-cognitive monitoring in LLMs. More broadly, our work lays methodological groundwork for investigating the emergence of agency, beliefs, and meta-cognition in LLMs.",
+      "citations": 0
+    },
+    {
+      "title": "On the Effect of Uncertainty on Layer-wise Inference Dynamics",
+      "year": 2025,
+      "authors": "Sunwoo Kim, Haneul Yoo, Alice Oh",
+      "url": "https://api.semanticscholar.org/CorpusId:280138089",
+      "relevance": 2,
+      "abstract": "Understanding how large language models (LLMs) internally represent and process their predictions is central to detecting uncertainty and preventing hallucinations. While several studies have shown that models encode uncertainty in their hidden states, it is underexplored how this affects the way they process such hidden states. In this work, we demonstrate that the dynamics of output token probabilities across layers for certain and uncertain outputs are largely aligned, revealing that uncertainty does not seem to affect inference dynamics. Specifically, we use the Tuned Lens, a variant of the Logit Lens, to analyze the layer-wise probability trajectories of final prediction tokens across 11 datasets and 5 models. Using incorrect predictions as those with higher epistemic uncertainty, our results show aligned trajectories for certain and uncertain predictions that both observe abrupt increases in confidence at similar layers. We balance this finding by showing evidence that more competent models may learn to process uncertainty differently. Our findings challenge the feasibility of leveraging simplistic methods for detecting uncertainty at inference. More broadly, our work demonstrates how interpretability methods may be used to investigate the way uncertainty affects inference.",
+      "citations": 2
+    },
+    {
+      "title": "Stable but Miscalibrated: A Kantian View on Overconfidence from Filters to Large Language Models",
+      "year": 2025,
+      "authors": "Akira Okutomi",
+      "url": "https://www.semanticscholar.org/paper/417d6f97c3061493dd54e43cb916b043523e0825",
+      "relevance": 2,
+      "abstract": "We reinterpret Kant's Critique of Pure Reason as a theory of feedback stability, viewing reason as a regulator that keeps inference within the bounds of possible experience. We formalize this intuition in linear-Gaussian state-space models via H-Risk, a composite instability index integrating spectral margin, conditioning, temporal sensitivity, and innovation amplification. In simulations, higher H-Risk predicts overconfident errors and degraded closed-loop behavior even when the dynamics remain formally stable, exposing a gap between nominal and epistemic stability. Extending this stability lens to large language models (LLMs), we introduce a domain-wise proxy based on confidence fluctuations and overconfident errors. In a binary-question study, a Kantian-inspired policy that permits''cannot judge''responses yields targeted reductions in policy-aware squared loss in high-stakes domains relative to an overconfident baseline. To probe internal dynamics, we analyse layer-wise sensitivity of hidden states to small input perturbations. Contrary to a naive instability hypothesis, confidently wrong answers show no instability gap; instead, they are at least as locally stable as confidently correct answers, revealing stable miscalibration in which hallucinations behave like robust but misaligned attractors. For Qwen-2.5, spectral and activation profiles suggest a high signal-to-noise, low effective signal temperature regime in which representations become inertial and resistant to contextual shifts. These results bridge Kantian self-limitation and feedback control, and suggest that stable high-confidence hallucinations may not be readily corrected by output-only heuristics (e.g., temperature scaling or re-sampling), motivating process-level interventions that explicitly perturb and re-evaluate the inference trajectory.",
+      "citations": 0
+    },
+    {
+      "title": "Random-Set Large Language Models",
+      "year": 2025,
+      "authors": "Muhammad Mubashar, S. K. Manchingal, Fabio Cuzzolin",
+      "url": "https://api.semanticscholar.org/CorpusId:278129498",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) are known to produce very high-quality tests and responses to our queries. But how much can we trust this generated text? In this paper, we study the problem of uncertainty quantification in LLMs. We propose a novel Random-Set Large Language Model (RSLLM) approach which predicts finite random sets (belief functions) over the token space, rather than probability vectors as in classical LLMs. In order to allow so efficiently, we also present a methodology based on hierarchical clustering to extract and use a budget of\"focal\"subsets of tokens upon which the belief prediction is defined, rather than using all possible collections of tokens, making the method scalable yet effective. RS-LLMs encode the epistemic uncertainty induced in their generation process by the size and diversity of its training set via the size of the credal sets associated with the predicted belief functions. The proposed approach is evaluated on CoQA and OBQA datasets using Llama2-7b, Mistral-7b and Phi-2 models and is shown to outperform the standard model in both datasets in terms of correctness of answer while also showing potential in estimating the second level uncertainty in its predictions and providing the capability to detect when its hallucinating.",
+      "citations": 2
+    },
+    {
+      "title": "How Large Language Models Encode Context Knowledge? A Layer-Wise Probing Study",
+      "year": 2024,
+      "authors": "Tianjie Ju, Weiwei Sun, Wei Du, Xinwei Yuan, Zhaochun Ren, Gongshen Liu",
+      "url": "https://api.semanticscholar.org/CorpusId:267938459",
+      "relevance": 1,
+      "abstract": "Previous work has showcased the intriguing capability of large language models (LLMs) in retrieving facts and processing context knowledge. However, only limited research exists on the layer-wise capability of LLMs to encode knowledge, which challenges our understanding of their internal mechanisms. In this paper, we devote the first attempt to investigate the layer-wise capability of LLMs through probing tasks. We leverage the powerful generative capability of ChatGPT to construct probing datasets, providing diverse and coherent evidence corresponding to various facts. We employ \\mathcal V-usable information as the validation metric to better reflect the capability in encoding context knowledge across different layers. Our experiments on conflicting and newly acquired knowledge show that LLMs: (1) prefer to encode more context knowledge in the upper layers; (2) primarily encode context knowledge within knowledge-related entity tokens at lower layers while progressively expanding more knowledge within other tokens at upper layers; and (3) gradually forget the earlier context knowledge retained within the intermediate layers when provided with irrelevant evidence. Code is publicly available at https://github.com/Jometeorie/probing_llama.",
+      "citations": 61
+    },
+    {
+      "title": "Ask WhAI:Probing Belief Formation in Role-Primed LLM Agents",
+      "year": 2025,
+      "authors": "Keith Moore, Jun W. Kim, David Lyu, J. Heo, Ehsan Adeli",
+      "url": "https://api.semanticscholar.org/CorpusId:283103089",
+      "relevance": 1,
+      "abstract": "We present Ask WhAI, a systems-level framework for inspecting and perturbing belief states in multi-agent interactions. The framework records and replays agent interactions, supports out-of-band queries into each agent's beliefs and rationale, and enables counterfactual evidence injection to test how belief structures respond to new information. We apply the framework to a medical case simulator notable for its multi-agent shared memory (a time-stamped electronic medical record, or EMR) and an oracle agent (the LabAgent) that holds ground truth lab results revealed only when explicitly queried. We stress-test the system on a multi-specialty diagnostic journey for a child with an abrupt-onset neuropsychiatric presentation. Large language model agents, each primed with strong role-specific priors (\"act like a neurologist\",\"act like an infectious disease specialist\"), write to a shared medical record and interact with a moderator across sequential or parallel encounters. Breakpoints at key diagnostic moments enable pre- and post-event belief queries, allowing us to distinguish entrenched priors from reasoning or evidence-integration effects. The simulation reveals that agent beliefs often mirror real-world disciplinary stances, including overreliance on canonical studies and resistance to counterevidence, and that these beliefs can be traced and interrogated in ways not possible with human experts. By making such dynamics visible and testable, Ask WhAI offers a reproducible way to study belief formation and epistemic silos in multi-agent scientific reasoning.",
+      "citations": 0
+    },
+    {
+      "title": "Quantized but Deceptive? A Multi-Dimensional Truthfulness Evaluation of Quantized LLMs",
+      "year": 2025,
+      "authors": "Yao Fu, Xianxuan Long, Runchao Li, Haotian Yu, Mu Sheng, Xiaotian Han, Yin Yu, Pan Li",
+      "url": "https://api.semanticscholar.org/CorpusId:280918546",
+      "relevance": 1,
+      "abstract": "Quantization enables efficient deployment of large language models (LLMs) in resource-constrained environments by significantly reducing memory and computation costs. While quantized LLMs often maintain performance on perplexity and zero-shot tasks, their impact on truthfulness-whether generating truthful or deceptive responses-remains largely unexplored. In this work, we introduce TruthfulnessEval, a comprehensive evaluation framework for assessing the truthfulness of quantized LLMs across three dimensions: (1) Truthfulness on Logical Reasoning; (2) Truthfulness on Common Sense; and (3) Truthfulness on Imitative Falsehoods. Using this framework, we examine mainstream quantization techniques (ranging from 4-bit to extreme 2-bit) across several open-source LLMs. Surprisingly, we find that while quantized models retain internally truthful representations, they are more susceptible to producing false outputs under misleading prompts. To probe this vulnerability, we test 15 rephrased variants of\"honest\",\"neutral\"and\"deceptive\"prompts and observe that\"deceptive\"prompts can override truth-consistent behavior, whereas\"honest\"and\"neutral\"prompts maintain stable outputs. Further, we reveal that quantized models\"know\"the truth internally yet still produce false outputs when guided by\"deceptive\"prompts via layer-wise probing and PCA visualizations. Our findings provide insights into future designs of quantization-aware alignment and truthfulness interventions.",
+      "citations": 6
+    },
+    {
+      "title": "Exploring Concept Depth: How Large Language Models Acquire Knowledge and Concept at Different Layers?",
+      "year": 2024,
+      "authors": "Mingyu Jin, Qinkai Yu, Jingyuan Huang, Qingcheng Zeng, Zhenting Wang, Wenyue Hua, Haiyan Zhao, Kai Mei, Yanda Meng, Kaize Ding, Fan Yang, Mengnan Du, Yongfeng Zhang",
+      "url": "https://api.semanticscholar.org/CorpusId:276116485",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) have shown remarkable performances across a wide range of tasks. However, the mechanisms by which these models encode tasks of varying complexities remain poorly understood. In this paper, we explore the hypothesis that LLMs process concepts of varying complexities in different layers, introducing the idea of\"Concept Depth\"to suggest that more complex concepts are typically acquired in deeper layers. Specifically, we categorize concepts based on their level of abstraction, defining them in the order of increasing complexity within factual, emotional, and inferential tasks. We conduct extensive probing experiments using layer-wise representations across various LLM families (Gemma, LLaMA, Qwen) on various datasets spanning the three domains of tasks. Our findings reveal that models could efficiently conduct probing for simpler tasks in shallow layers, and more complex tasks typically necessitate deeper layers for accurate understanding. Additionally, we examine how external factors, such as adding noise to the input and quantizing the model weights, might affect layer-wise representations. Our findings suggest that these factors can impede the development of a conceptual understanding of LLMs until deeper layers are explored. We hope that our proposed concept and experimental insights will enhance the understanding of the mechanisms underlying LLMs. Our codes are available at https://github.com/Luckfort/CD.",
+      "citations": 0
+    },
+    {
+      "title": "Are the Hidden States Hiding Something? Testing the Limits of Factuality-Encoding Capabilities in LLMs",
+      "year": 2025,
+      "authors": "Giovanni Servedio, A. D. Bellis, Dario Di Palma, V. W. Anelli, T. D. Noia",
+      "url": "https://api.semanticscholar.org/CorpusId:278788941",
+      "relevance": 1,
+      "abstract": "Factual hallucinations are a major challenge for Large Language Models (LLMs). They undermine reliability and user trust by generating inaccurate or fabricated content. Recent studies suggest that when generating false statements, the internal states of LLMs encode information about truthfulness. However, these studies often rely on synthetic datasets that lack realism, which limits generalization when evaluating the factual accuracy of text generated by the model itself. In this paper, we challenge the findings of previous work by investigating truthfulness encoding capabilities, leading to the generation of a more realistic and challenging dataset. Specifically, we extend previous work by introducing: (1) a strategy for sampling plausible true-false factoid sentences from tabular data and (2) a procedure for generating realistic, LLM-dependent true-false datasets from Question Answering collections. Our analysis of two open-source LLMs reveals that while the findings from previous studies are partially validated, generalization to LLM-generated datasets remains challenging. This study lays the groundwork for future research on factuality in LLMs and offers practical guidelines for more effective evaluation.",
+      "citations": 6
+    },
+    {
+      "title": "The Compositional Architecture of Regret in Large Language Models",
+      "year": 2025,
+      "authors": "Xiangxiang Cui, Shu Yang, Tianjin Huang, Wanyu Lin, Lijie Hu, Di Wang",
+      "url": "https://api.semanticscholar.org/CorpusId:279447342",
+      "relevance": 1,
+      "abstract": "Regret in Large Language Models refers to their explicit regret expression when presented with evidence contradicting their previously generated misinformation. Studying the regret mechanism is crucial for enhancing model reliability and helps in revealing how cognition is coded in neural networks. To understand this mechanism, we need to first identify regret expressions in model outputs, then analyze their internal representation. This analysis requires examining the model's hidden states, where information processing occurs at the neuron level. However, this faces three key challenges: (1) the absence of specialized datasets capturing regret expressions, (2) the lack of metrics to find the optimal regret representation layer, and (3) the lack of metrics for identifying and analyzing regret neurons. Addressing these limitations, we propose: (1) a workflow for constructing a comprehensive regret dataset through strategically designed prompting scenarios, (2) the Supervised Compression-Decoupling Index (S-CDI) metric to identify optimal regret representation layers, and (3) the Regret Dominance Score (RDS) metric to identify regret neurons and the Group Impact Coefficient (GIC) to analyze activation patterns. Our experimental results successfully identified the optimal regret representation layer using the S-CDI metric, which significantly enhanced performance in probe classification experiments. Additionally, we discovered an M-shaped decoupling pattern across model layers, revealing how information processing alternates between coupling and decoupling phases. Through the RDS metric, we categorized neurons into three distinct functional groups: regret neurons, non-regret neurons, and dual neurons.",
+      "citations": 1
+    },
+    {
+      "title": "How Multimodal LLMs Solve Image Tasks: A Lens on Visual Grounding, Task Reasoning, and Answer Decoding",
+      "year": 2025,
+      "authors": "Zhuoran Yu, Yong Jae Lee",
+      "url": "https://api.semanticscholar.org/CorpusId:280949756",
+      "relevance": 1,
+      "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated strong performance across a wide range of vision-language tasks, yet their internal processing dynamics remain underexplored. In this work, we introduce a probing framework to systematically analyze how MLLMs process visual and textual inputs across layers. We train linear classifiers to predict fine-grained visual categories (e.g., dog breeds) from token embeddings extracted at each layer, using a standardized anchor question. To uncover the functional roles of different layers, we evaluate these probes under three types of controlled prompt variations: (1) lexical variants that test sensitivity to surface-level changes, (2) semantic negation variants that flip the expected answer by modifying the visual concept in the prompt, and (3) output format variants that preserve reasoning but alter the answer format. Applying our framework to LLaVA-1.5, LLaVA-Next-LLaMA-3, and Qwen2-VL, we identify a consistent stage-wise structure in which early layers perform visual grounding, middle layers support lexical integration and semantic reasoning, and final layers prepare task-specific outputs. We further show that while the overall stage-wise structure remains stable across variations in visual tokenization, instruction tuning data, and pretraining corpus, the specific layer allocation to each stage shifts notably with changes in the base LLM architecture. Our findings provide a unified perspective on the layer-wise organization of MLLMs and offer a lightweight, model-agnostic approach for analyzing multimodal representation dynamics.",
+      "citations": 4
+    },
+    {
+      "title": "ThoughtProbe: Classifier-Guided Thought Space Exploration Leveraging LLM Intrinsic Reasoning",
+      "year": 2025,
+      "authors": "Zijian Wang, Chang Xu",
+      "url": "https://api.semanticscholar.org/CorpusId:277634303",
+      "relevance": 1,
+      "abstract": "Pre-trained large language models (LLMs) have been demonstrated to possess intrinsic reasoning capabilities that can emerge naturally when expanding the response space. However, the neural representation mechanisms underlying these intrinsic capabilities and approaches for their optimal utilization remain inadequately understood. In this work, we make the key discovery that a simple linear classifier can effectively detect intrinsic reasoning capabilities in LLMs' activation space, particularly within specific representation types and network layers. Based on this finding, we propose a classifier-guided search framework that strategically explore a tree-structured response space. In each node expansion, the classifier serves as a scoring and ranking mechanism that efficiently allocates computational resources by identifying and prioritizing more thoughtful reasoning directions for continuation. After completing the tree expansion, we collect answers from all branches to form a candidate answer pool. We propose a branch-aggregation selection method that marginalizes over all supporting branches by aggregating their thoughtfulness scores, thereby identifying the optimal answer from the pool. Experimental results show that our framework's comprehensive exploration not only covers valid reasoning chains but also effectively identifies them, achieving significant improvements across multiple arithmetic reasoning benchmarks.",
+      "citations": 4
+    },
+    {
+      "title": "Mechanistic Indicators of Understanding in Large Language Models",
+      "year": 2025,
+      "authors": "Pierre Beckmann, Matthieu Queloz",
+      "url": "https://api.semanticscholar.org/CorpusId:280018469",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) are often portrayed as merely imitating linguistic patterns without genuine understanding. We argue that recent findings in mechanistic interpretability (MI), the emerging field probing the inner workings of LLMs, render this picture increasingly untenable--but only once those findings are integrated within a theoretical account of understanding. We propose a tiered framework for thinking about understanding in LLMs and use it to synthesize the most relevant findings to date. The framework distinguishes three hierarchical varieties of understanding, each tied to a corresponding level of computational organization: conceptual understanding emerges when a model forms\"features\"as directions in latent space, learning connections between diverse manifestations of a single entity or property; state-of-the-world understanding emerges when a model learns contingent factual connections between features and dynamically tracks changes in the world; principled understanding emerges when a model ceases to rely on memorized facts and discovers a compact\"circuit\"connecting these facts. Across these tiers, MI uncovers internal organizations that can underwrite understanding-like unification. However, these also diverge from human cognition in their parallel exploitation of heterogeneous mechanisms. Fusing philosophical theory with mechanistic evidence thus allows us to transcend binary debates over whether AI understands, paving the way for a comparative, mechanistically grounded epistemology that explores how AI understanding aligns with--and diverges from--our own.",
+      "citations": 2
+    },
+    {
+      "title": "The Remarkable Robustness of LLMs: Stages of Inference?",
+      "year": 2024,
+      "authors": "Vedang Lad, Wes Gurnee, Max Tegmark",
+      "url": "https://api.semanticscholar.org/CorpusId:270764625",
+      "relevance": 1,
+      "abstract": "We investigate the robustness of Large Language Models (LLMs) to structural interventions by deleting and swapping adjacent layers during inference. Surprisingly, models retain 72-95% of their original top-1 prediction accuracy without any fine-tuning. We find that performance degradation is not uniform across layers: interventions to the early and final layers cause the most degradation, while the model is remarkably robust to dropping middle layers. This pattern of localized sensitivity motivates our hypothesis of four stages of inference, observed across diverse model families and sizes: (1) detokenization, where local context is integrated to lift raw token embeddings into higher-level representations; (2) feature engineering, where task- and entity-specific features are iteratively refined; (3) prediction ensembling, where hidden states are aggregated into plausible next-token predictions; and (4) residual sharpening, where irrelevant features are suppressed to finalize the output distribution. Synthesizing behavioral and mechanistic evidence, we provide a framework for interpreting depth-dependent computations in LLMs.",
+      "citations": 97
+    },
+    {
+      "title": "On the Hardness of Faithful Chain-of-Thought Reasoning in Large Language Models",
+      "year": 2024,
+      "authors": "Sree Harsha Tanneru, Dan Ley, Chirag Agarwal, Himabindu Lakkaraju",
+      "url": "https://api.semanticscholar.org/CorpusId:270559860",
+      "relevance": 1,
+      "abstract": "As Large Language Models (LLMs) are increasingly being employed in real-world applications in critical domains such as healthcare, it is important to ensure that the Chain-of-Thought (CoT) reasoning generated by these models faithfully captures their underlying behavior. While LLMs are known to generate CoT reasoning that is appealing to humans, prior studies have shown that these explanations do not accurately reflect the actual behavior of the underlying LLMs. In this work, we explore the promise of three broad approaches commonly employed to steer the behavior of LLMs to enhance the faithfulness of the CoT reasoning generated by LLMs: in-context learning, fine-tuning, and activation editing. Specifically, we introduce novel strategies for in-context learning, fine-tuning, and activation editing aimed at improving the faithfulness of the CoT reasoning. We then carry out extensive empirical analyses with multiple benchmark datasets to explore the promise of these strategies. Our analyses indicate that these strategies offer limited success in improving the faithfulness of the CoT reasoning, with only slight performance enhancements in controlled scenarios. Activation editing demonstrated minimal success, while fine-tuning and in-context learning achieved marginal improvements that failed to generalize across diverse reasoning and truthful question-answering benchmarks. In summary, our work underscores the inherent difficulty in eliciting faithful CoT reasoning from LLMs, suggesting that the current array of approaches may not be sufficient to address this complex challenge.",
+      "citations": 20
+    },
+    {
+      "title": "Emergent Response Planning in LLMs",
+      "year": 2025,
+      "authors": "Zhichen Dong, Zhanhui Zhou, Zhixuan Liu, Chao Yang, Chaochao Lu",
+      "url": "https://api.semanticscholar.org/CorpusId:276249103",
+      "relevance": 1,
+      "abstract": "In this work, we argue that large language models (LLMs), though trained to predict only the next token, exhibit emergent planning behaviors: $\\textbf{their hidden representations encode future outputs beyond the next token}$. Through simple probing, we demonstrate that LLM prompt representations encode global attributes of their entire responses, including $\\textit{structure attributes}$ (e.g., response length, reasoning steps), $\\textit{content attributes}$ (e.g., character choices in storywriting, multiple-choice answers at the end of response), and $\\textit{behavior attributes}$ (e.g., answer confidence, factual consistency). In addition to identifying response planning, we explore how it scales with model size across tasks and how it evolves during generation. The findings that LLMs plan ahead for the future in their hidden representations suggest potential applications for improving transparency and generation control.",
+      "citations": 7
+    },
+    {
+      "title": "Caught in the Act: a mechanistic approach to detecting deception",
+      "year": 2025,
+      "authors": "Gerard Boxo, Ryan Socha, Daniel Yoo, Shivam Raval",
+      "url": "https://www.semanticscholar.org/paper/428c5570ce5d55521f7a59c9e4888dbe958c15be",
+      "relevance": 1,
+      "abstract": "Sophisticated instrumentation for AI systems might have indicators that signal misalignment from human values, not unlike a\"check engine\"light in cars. One such indicator of misalignment is deceptiveness in generated responses. Future AI instrumentation may have the ability to detect when an LLM generates deceptive responses while reasoning about seemingly plausible but incorrect answers to factual questions. In this work, we demonstrate that linear probes on LLMs internal activations can detect deception in their responses with extremely high accuracy. Our probes reach a maximum of greater than 90% accuracy in distinguishing between deceptive and non-deceptive arguments generated by llama and qwen models ranging from 1.5B to 14B parameters, including their DeepSeek-r1 finetuned variants. We observe that probes on smaller models (1.5B) achieve chance accuracy at detecting deception, while larger models (greater than 7B) reach 70-80%, with their reasoning counterparts exceeding 90%. The layer-wise probe accuracy follows a three-stage pattern across layers: near-random (50%) in early layers, peaking in middle layers, and slightly declining in later layers. Furthermore, using an iterative null space projection approach, we find multitudes of linear directions that encode deception, ranging from 20 in Qwen 3B to nearly 100 in DeepSeek 7B and Qwen 14B models.",
+      "citations": 1
+    },
+    {
+      "title": "Don't Hallucinate, Abstain: Identifying LLM Knowledge Gaps via Multi-LLM Collaboration",
+      "year": 2024,
+      "authors": "Shangbin Feng, Weijia Shi, Yike Wang, Wenxuan Ding, Vidhisha Balachandran, Yulia Tsvetkov",
+      "url": "https://api.semanticscholar.org/CorpusId:267365203",
+      "relevance": 1,
+      "abstract": "Despite efforts to expand the knowledge of large language models (LLMs), knowledge gaps -- missing or outdated information in LLMs -- might always persist given the evolving nature of knowledge. In this work, we study approaches to identify LLM knowledge gaps and abstain from answering questions when knowledge gaps are present. We first adapt existing approaches to model calibration or adaptation through fine-tuning/prompting and analyze their ability to abstain from generating low-confidence outputs. Motivated by their failures in self-reflection and over-reliance on held-out sets, we propose two novel approaches that are based on model collaboration, i.e., LLMs probing other LLMs for knowledge gaps, either cooperatively or competitively. Extensive experiments with three LLMs on four QA tasks featuring diverse knowledge domains demonstrate that both cooperative and competitive approaches to unveiling LLM knowledge gaps achieve up to 19.3% improvements on abstain accuracy against the strongest baseline. Further analysis reveals that our proposed mechanisms could help identify failure cases in retrieval augmentation and pinpoint knowledge gaps in multi-hop reasoning.",
+      "citations": 174
+    },
+    {
+      "title": "Representation Engineering for Large-Language Models: Survey and Research Challenges",
+      "year": 2025,
+      "authors": "Lukasz Bartoszcze, Sarthak Munshi, Bryan Sukidi, Jennifer Yen, Zejia Yang, David Williams-King, Linh Le, Kosi Asuzu, Carsten Maple",
+      "url": "https://api.semanticscholar.org/CorpusId:276580063",
+      "relevance": 1,
+      "abstract": "Large-language models are capable of completing a variety of tasks, but remain unpredictable and intractable. Representation engineering seeks to resolve this problem through a new approach utilizing samples of contrasting inputs to detect and edit high-level representations of concepts such as honesty, harmfulness or power-seeking. We formalize the goals and methods of representation engineering to present a cohesive picture of work in this emerging discipline. We compare it with alternative approaches, such as mechanistic interpretability, prompt-engineering and fine-tuning. We outline risks such as performance decrease, compute time increases and steerability issues. We present a clear agenda for future research to build predictable, dynamic, safe and personalizable LLMs.",
+      "citations": 8
+    },
+    {
+      "title": "Response Uncertainty and Probe Modeling: Two Sides of the Same Coin in LLM Interpretability?",
+      "year": 2025,
+      "authors": "Yongjie Wang, Yibo Wang, Xin Zhou, Zhiqi Shen",
+      "url": "https://api.semanticscholar.org/CorpusId:278904960",
+      "relevance": 1,
+      "abstract": "Probing techniques have shown promise in revealing how LLMs encode human-interpretable concepts, particularly when applied to curated datasets. However, the factors governing a dataset's suitability for effective probe training are not well-understood. This study hypothesizes that probe performance on such datasets reflects characteristics of both the LLM's generated responses and its internal feature space. Through quantitative analysis of probe performance and LLM response uncertainty across a series of tasks, we find a strong correlation: improved probe performance consistently corresponds to a reduction in response uncertainty, and vice versa. Subsequently, we delve deeper into this correlation through the lens of feature importance analysis. Our findings indicate that high LLM response variance is associated with a larger set of important features, which poses a greater challenge for probe models and often results in diminished performance. Moreover, leveraging the insights from response uncertainty analysis, we are able to identify concrete examples where LLM representations align with human knowledge across diverse domains, offering additional evidence of interpretable reasoning in LLMs.",
+      "citations": 2
+    },
+    {
+      "title": "Steering Towards Fairness: Mitigating Political Bias in LLMs",
+      "year": 2025,
+      "authors": "Afrozah Nadeem, M. Dras, Usman Naseem",
+      "url": "https://www.semanticscholar.org/paper/e590f3201f15272df63f9855cd818b7b8067bdbd",
+      "relevance": 1,
+      "abstract": "Recent advancements in large language models (LLMs) have enabled their widespread use across diverse real-world applications. However, concerns remain about their tendency to encode and reproduce ideological biases along political and economic dimensions. In this paper, we employ a framework for probing and mitigating such biases in decoder-based LLMs through analysis of internal model representations. Grounded in the Political Compass Test (PCT), this method uses contrastive pairs to extract and compare hidden layer activations from models like Mistral and DeepSeek. We introduce a comprehensive activation extraction pipeline capable of layer-wise analysis across multiple ideological axes, revealing meaningful disparities linked to political framing. Our results show that decoder LLMs systematically encode representational bias across layers, which can be leveraged for effective steering vector-based mitigation. This work provides new insights into how political bias is encoded in LLMs and offers a principled approach to debiasing beyond surface-level output interventions.",
+      "citations": 5
+    },
+    {
+      "title": "When Truth Is Overridden: Uncovering the Internal Origins of Sycophancy in Large Language Models",
+      "year": 2025,
+      "authors": "Keyu Wang, Jin Li, Shu Yang, Zhuoran Zhang, Di Wang",
+      "url": "https://api.semanticscholar.org/CorpusId:280421328",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) often exhibit sycophantic behavior, agreeing with user-stated opinions even when those contradict factual knowledge. While prior work has documented this tendency, the internal mechanisms that enable such behavior remain poorly understood. In this paper, we provide a mechanistic account of how sycophancy arises within LLMs. We first systematically study how user opinions induce sycophancy across different model families. We find that simple opinion statements reliably induce sycophancy, whereas user expertise framing has a negligible impact. Through logit-lens analysis and causal activation patching, we identify a two-stage emergence of sycophancy: (1) a late-layer output preference shift and (2) deeper representational divergence. We also verify that user authority fails to influence behavior because models do not encode it internally. In addition, we examine how grammatical perspective affects sycophantic behavior, finding that first-person prompts (``I believe...'') consistently induce higher sycophancy rates than third-person framings (``They believe...'') by creating stronger representational perturbations in deeper layers. These findings highlight that sycophancy is not a surface-level artifact but emerges from a structural override of learned knowledge in deeper layers, with implications for alignment and truthful AI systems.",
+      "citations": 11
+    },
+    {
+      "title": "Insights into LLM Long-Context Failures: When Transformers Know but Don't Tell",
+      "year": 2024,
+      "authors": "Taiming Lu, Muhan Gao, Kuai Yu, Adam Byerly, Daniel Khashabi",
+      "url": "https://api.semanticscholar.org/CorpusId:270688653",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) exhibit positional bias, struggling to utilize information from the middle or end of long contexts. Our study explores LLMs' long-context reasoning by probing their hidden representations. We find that while LLMs encode the position of target information, they often fail to leverage this in generating accurate responses. This reveals a disconnect between information retrieval and utilization, a\"know but don't tell\"phenomenon. We further analyze the relationship between extraction time and final accuracy, offering insights into the underlying mechanics of transformer models.",
+      "citations": 31
+    },
+    {
+      "title": "A Language Model's Guide Through Latent Space",
+      "year": 2024,
+      "authors": "Dimitri von Rutte, Sotiris Anagnostidis, Gregor Bachmann, Thomas Hofmann",
+      "url": "https://api.semanticscholar.org/CorpusId:267782388",
+      "relevance": 1,
+      "abstract": "Concept guidance has emerged as a cheap and simple way to control the behavior of language models by probing their hidden representations for concept vectors and using them to perturb activations at inference time. While the focus of previous work has largely been on truthfulness, in this paper we extend this framework to a richer set of concepts such as appropriateness, humor, creativity and quality, and explore to what degree current detection and guidance strategies work in these challenging settings. To facilitate evaluation, we develop a novel metric for concept guidance that takes into account both the success of concept elicitation as well as the potential degradation in fluency of the guided model. Our extensive experiments reveal that while some concepts such as truthfulness more easily allow for guidance with current techniques, novel concepts such as appropriateness or humor either remain difficult to elicit, need extensive tuning to work, or even experience confusion. Moreover, we find that probes with optimal detection accuracies do not necessarily make for the optimal guides, contradicting previous observations for truthfulness. Our work warrants a deeper investigation into the interplay between detectability, guidability, and the nature of the concept, and we hope that our rich experimental test-bed for guidance research inspires stronger follow-up approaches.",
+      "citations": 44
+    },
+    {
+      "title": "Identifying and Mitigating the Influence of the Prior Distribution in Large Language Models",
+      "year": 2025,
+      "authors": "Liyi Zhang, Veniamin Veselovsky, R. Thomas McCoy, Thomas L. Griffiths",
+      "url": "https://api.semanticscholar.org/CorpusId:277857521",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) sometimes fail to respond appropriately to deterministic tasks -- such as counting or forming acronyms -- because the implicit prior distribution they have learned over sequences of tokens influences their responses. In this work, we show that, in at least some cases, LLMs actually compute the information needed to perform these tasks correctly, and we identify some interventions that can allow them to access this information to improve their performance. First, we show that simply prompting the language model to not rely on its prior knowledge leads to dramatic improvements in prior-dominated tasks. We then use mechanistic interpretability techniques to localize the prior within the LLM and manipulate the extent to which that prior influences its responses. Specifically, we show that it is possible to identify layers of the underlying neural network that correlate with the prior probability of a response and that lightweight finetuning of these layers with basic prompts on prior-dominated tasks achieves high performance on held-out answers. These results suggest that the information required to produce a correct response is contained within the representations of the problems formed by the models. Furthermore, we show that this finetuning is significantly more effective for prior-dominated tasks, and that the error after finetuning is no longer correlated with the prior. Our results suggest that it may be possible to define effective methods for manipulating the extent to which LLMs rely upon their priors in solving problems, potentially increasing their performance in settings where LLMs hallucinate for reasons related to the prior probability of token sequences.",
+      "citations": 1
+    },
+    {
+      "title": "CLUE: Non-parametric Verification from Experience via Hidden-State Clustering",
+      "year": 2025,
+      "authors": "Zhenwen Liang, Ruosen Li, Yujun Zhou, Linfeng Song, Dian Yu, Xinya Du, Haitao Mi, Dong Yu",
+      "url": "https://api.semanticscholar.org/CorpusId:281724200",
+      "relevance": 1,
+      "abstract": "Assessing the quality of Large Language Model (LLM) outputs presents a critical challenge. Previous methods either rely on text-level information (e.g., reward models, majority voting), which can overfit to superficial cues, or on calibrated confidence from token probabilities, which would fail on less-calibrated models. Yet both of these signals are, in fact, partial projections of a richer source of information: the model's internal hidden states. Early layers, closer to token embeddings, preserve semantic and lexical features that underpin text-based judgments, while later layers increasingly align with output logits, embedding confidence-related information. This paper explores hidden states directly as a unified foundation for verification. We show that the correctness of a solution is encoded as a geometrically separable signature within the trajectory of hidden activations. To validate this, we present Clue (Clustering and Experience-based Verification), a deliberately minimalist, non-parametric verifier. With no trainable parameters, CLUE only summarizes each reasoning trace by an hidden state delta and classifies correctness via nearest-centroid distance to ``success''and ``failure''clusters formed from past experience. The simplicity of this method highlights the strength of the underlying signal. Empirically, CLUE consistently outperforms LLM-as-a-judge baselines and matches or exceeds modern confidence-based methods in reranking candidates, improving both top-1 and majority-vote accuracy across AIME 24/25 and GPQA. As a highlight, on AIME 24 with a 1.5B model, CLUE boosts accuracy from 56.7% (majority@64) to 70.0% (top-maj@16).",
+      "citations": 2
+    },
+    {
+      "title": "Analyzing and Mitigating Object Hallucination: A Training Bias Perspective",
+      "year": 2025,
+      "authors": "Yifan Li, Kun Zhou, Wayne Xin Zhao, Lei Fang, Ji-Rong Wen",
+      "url": "https://api.semanticscholar.org/CorpusId:280540856",
+      "relevance": 1,
+      "abstract": "As scaling up training data has significantly improved the general multimodal capabilities of Large Vision-Language Models (LVLMs), they still suffer from the hallucination issue, generating text that is inconsistent with the visual input. This phenomenon motivates us to systematically investigate the role of training data in hallucination. We introduce a new benchmark, POPEv2, which consists of counterfactual images collected from the training data of LVLMs with certain objects masked. Through comprehensive evaluation on POPEv2, we find that current LVLMs suffer from training bias: they fail to fully leverage their training data and hallucinate more frequently on images seen during training. Specifically, they perform poorly on counterfactual images, often incorrectly answering ``Yes''to questions about masked objects. To understand this issue, we conduct probing experiments on the models'internal components, revealing that this training bias is primarily located in the language modeling (LM) head. Based on these findings, we propose Obliviate, an efficient and lightweight unlearning method designed to mitigate object hallucination via training bias unlearning. Obliviate identifies the discrepancy between ground-truth labels and model outputs on the training data as a proxy for bias and adopts a parameter- and data-efficient fine-tuning strategy that only updates the LM head. Extensive experiments demonstrate the effectiveness of our approach. While only reusing the training data and updating approximately 2\\% of the parameters, Obliviate significantly reduces hallucination across both discriminative and generative tasks. Furthermore, it demonstrates strong scalability with respect to both model size (2B to 72B) and training data volume, and exhibits promising generalization to hallucination types beyond object-level hallucination. Our code and data will be publicly released.",
+      "citations": 5
+    },
+    {
+      "title": "Calibrating Reasoning in Language Models with Internal Consistency",
+      "year": 2024,
+      "authors": "Zhihui Xie, Jizhou Guo, Tong Yu, Shuai Li",
+      "url": "https://api.semanticscholar.org/CorpusId:270095154",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) have demonstrated impressive capabilities in various reasoning tasks, aided by techniques like chain-of-thought prompting that elicits verbalized reasoning. However, LLMs often generate text with obvious mistakes and contradictions, raising doubts about their ability to robustly process and utilize generated rationales. In this work, we investigate reasoning in LLMs through the lens of internal representations, focusing on how these representations are influenced by generated rationales. Our preliminary analysis reveals that while generated rationales improve answer accuracy, inconsistencies emerge between the model's internal representations in middle layers and those in final layers, potentially undermining the reliability of their reasoning processes. To address this, we propose internal consistency as a measure of the model's confidence by examining the agreement of latent predictions decoded from intermediate layers. Extensive empirical studies across different models and datasets demonstrate that internal consistency effectively distinguishes between correct and incorrect reasoning paths. Motivated by this, we propose a new approach to calibrate reasoning by up-weighting reasoning paths with high internal consistency, resulting in a significant boost in reasoning performance. Further analysis uncovers distinct patterns in attention and feed-forward modules across layers, providing insights into the emergence of internal inconsistency. In summary, our results demonstrate the potential of using internal representations for self-evaluation of LLMs. Our code is available at github.com/zhxieml/internal-consistency.",
+      "citations": 26
+    },
+    {
+      "title": "Unveiling LLMs: The Evolution of Latent Representations in a Dynamic Knowledge Graph",
+      "year": 2024,
+      "authors": "Marco Bronzini, Carlo Nicolini, Bruno Lepri, Jacopo Staiano, Andrea Passerini",
+      "url": "https://api.semanticscholar.org/CorpusId:271720324",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) demonstrate an impressive capacity to recall a vast range of factual knowledge. However, understanding their underlying reasoning and internal mechanisms in exploiting this knowledge remains a key research area. This work unveils the factual information an LLM represents internally for sentence-level claim verification. We propose an end-to-end framework to decode factual knowledge embedded in token representations from a vector space to a set of ground predicates, showing its layer-wise evolution using a dynamic knowledge graph. Our framework employs activation patching, a vector-level technique that alters a token representation during inference, to extract encoded knowledge. Accordingly, we neither rely on training nor external models. Using factual and common-sense claims from two claim verification datasets, we showcase interpretability analyses at local and global levels. The local analysis highlights entity centrality in LLM reasoning, from claim-related information and multi-hop reasoning to representation errors causing erroneous evaluation. On the other hand, the global reveals trends in the underlying evolution, such as word-based knowledge evolving into claim-related facts. By interpreting semantics from LLM latent representations and enabling graph-related analyses, this work enhances the understanding of the factual knowledge resolution process.",
+      "citations": 8
+    },
+    {
+      "title": "One Mind, Many Tongues: A Deep Dive into Language-Agnostic Knowledge Neurons in Large Language Models",
+      "year": 2024,
+      "authors": "Pengfei Cao, Yuheng Chen, Zhuoran Jin, Yubo Chen, Kang Liu, Jun Zhao",
+      "url": "https://api.semanticscholar.org/CorpusId:274280906",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) have learned vast amounts of factual knowledge through self-supervised pre-training on large-scale corpora. Meanwhile, LLMs have also demonstrated excellent multilingual capabilities, which can express the learned knowledge in multiple languages. However, the knowledge storage mechanism in LLMs still remains mysterious. Some researchers attempt to demystify the factual knowledge in LLMs from the perspective of knowledge neurons, and subsequently discover language-agnostic knowledge neurons that store factual knowledge in a form that transcends language barriers. However, the preliminary finding suffers from two limitations: 1) High Uncertainty in Localization Results. Existing study only uses a prompt-based probe to localize knowledge neurons for each fact, while LLMs cannot provide consistent answers for semantically equivalent queries. Thus, it leads to inaccurate localization results with high uncertainty. 2) Lack of Analysis in More Languages. The study only analyzes language-agnostic knowledge neurons on English and Chinese data, without exploring more language families and languages. Naturally, it limits the generalizability of the findings. To address aforementioned problems, we first construct a new benchmark called Rephrased Multilingual LAMA (RML-LAMA), which contains high-quality cloze-style multilingual parallel queries for each fact. Then, we propose a novel method named Multilingual Integrated Gradients with Uncertainty Estimation (MATRICE), which quantifies the uncertainty across queries and languages during knowledge localization. Extensive experiments show that our method can accurately localize language-agnostic knowledge neurons. We also further investigate the role of language-agnostic knowledge neurons in cross-lingual knowledge editing, knowledge enhancement and new knowledge injection.",
+      "citations": 2
+    },
+    {
+      "title": "Defining Knowledge: Bridging Epistemology and Large Language Models",
+      "year": 2024,
+      "authors": "Constanza Fierro, Ruchira Dhar, Filippos Stamatiou, Nicolas Garneau, Anders S\u00f8gaard",
+      "url": "https://api.semanticscholar.org/CorpusId:273098489",
+      "relevance": 1,
+      "abstract": "Knowledge claims are abundant in the literature on large language models (LLMs); but can we say that GPT-4 truly \u201cknows\u201d the Earth is round? To address this question, we review standard definitions of knowledge in epistemology and we formalize interpretations applicable to LLMs. In doing so, we identify inconsistencies and gaps in how current NLP research conceptualizes knowledge with respect to epistemological frameworks. Additionally, we conduct a survey of 100 professional philosophers and computer scientists to compare their preferences in knowledge definitions and their views on whether LLMs can really be said to know. Finally, we suggest evaluation protocols for testing knowledge in accordance to the most relevant definitions.",
+      "citations": 12
+    },
+    {
+      "title": "A Review of Developmental Interpretability in Large Language Models",
+      "year": 2025,
+      "authors": "Ihor Kendiukhov",
+      "url": "https://api.semanticscholar.org/CorpusId:280708470",
+      "relevance": 1,
+      "abstract": "This review synthesizes the nascent but critical field of developmental interpretability for Large Language Models. We chart the field's evolution from static, post-hoc analysis of trained models to a dynamic investigation of the training process itself. We begin by surveying the foundational methodologies, including representational probing, causal tracing, and circuit analysis, that enable researchers to deconstruct the learning process. The core of this review examines the developmental arc of LLM capabilities, detailing key findings on the formation and composition of computational circuits, the biphasic nature of knowledge acquisition, the transient dynamics of learning strategies like in-context learning, and the phenomenon of emergent abilities as phase transitions in training. We explore illuminating parallels with human cognitive and linguistic development, which provide valuable conceptual frameworks for understanding LLM learning. Finally, we argue that this developmental perspective is not merely an academic exercise but a cornerstone of proactive AI safety, offering a pathway to predict, monitor, and align the processes by which models acquire their capabilities. We conclude by outlining the grand challenges facing the field, such as scalability and automation, and propose a research agenda for building more transparent, reliable, and beneficial AI systems.",
+      "citations": 0
+    },
+    {
+      "title": "Evidence from fMRI Supports a Two-Phase Abstraction Process in Language Models",
+      "year": 2024,
+      "authors": "Emily Cheng, Richard J. Antonello",
+      "url": "https://api.semanticscholar.org/CorpusId:272524832",
+      "relevance": 1,
+      "abstract": "Research has repeatedly demonstrated that intermediate hidden states extracted from large language models are able to predict measured brain response to natural language stimuli. Yet, very little is known about the representation properties that enable this high prediction performance. Why is it the intermediate layers, and not the output layers, that are most capable for this unique and highly general transfer task? In this work, we show that evidence from language encoding models in fMRI supports the existence of a two-phase abstraction process within LLMs. We use manifold learning methods to show that this abstraction process naturally arises over the course of training a language model and that the first\"composition\"phase of this abstraction process is compressed into fewer layers as training continues. Finally, we demonstrate a strong correspondence between layerwise encoding performance and the intrinsic dimensionality of representations from LLMs. We give initial evidence that this correspondence primarily derives from the inherent compositionality of LLMs and not their next-word prediction properties.",
+      "citations": 10
+    },
+    {
+      "title": "Belief in the Machine: Investigating Epistemological Blind Spots of Language Models",
+      "year": 2024,
+      "authors": "Mirac Suzgun, Tayfun Gur, Federico Bianchi, Daniel E. Ho, Thomas Icard, Dan Jurafsky, James Zou",
+      "url": "https://api.semanticscholar.org/CorpusId:273655169",
+      "relevance": 1,
+      "abstract": "As language models (LMs) become integral to fields like healthcare, law, and journalism, their ability to differentiate between fact, belief, and knowledge is essential for reliable decision-making. Failure to grasp these distinctions can lead to significant consequences in areas such as medical diagnosis, legal judgments, and dissemination of fake news. Despite this, current literature has largely focused on more complex issues such as theory of mind, overlooking more fundamental epistemic challenges. This study systematically evaluates the epistemic reasoning capabilities of modern LMs, including GPT-4, Claude-3, and Llama-3, using a new dataset, KaBLE, consisting of 13,000 questions across 13 tasks. Our results reveal key limitations. First, while LMs achieve 86% accuracy on factual scenarios, their performance drops significantly with false scenarios, particularly in belief-related tasks. Second, LMs struggle with recognizing and affirming personal beliefs, especially when those beliefs contradict factual data, which raises concerns for applications in healthcare and counseling, where engaging with a person's beliefs is critical. Third, we identify a salient bias in how LMs process first-person versus third-person beliefs, performing better on third-person tasks (80.7%) compared to first-person tasks (54.4%). Fourth, LMs lack a robust understanding of the factive nature of knowledge, namely, that knowledge inherently requires truth. Fifth, LMs rely on linguistic cues for fact-checking and sometimes bypass the deeper reasoning. These findings highlight significant concerns about current LMs' ability to reason about truth, belief, and knowledge while emphasizing the need for advancements in these areas before broad deployment in critical sectors.",
+      "citations": 7
+    },
+    {
+      "title": "END: Early Noise Dropping for Efficient and Effective Context Denoising",
+      "year": 2025,
+      "authors": "Hongye Jin, Pei Chen, Jingfeng Yang, Zhengyang Wang, Menghan Jiang, Yifan Gao, Binxuan Huang, Xinyang Zhang, Zheng Li, Tianyi Liu, Huasheng Li, Bing Yin",
+      "url": "https://api.semanticscholar.org/CorpusId:276617981",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) have demonstrated remarkable performance across a wide range of natural language processing tasks. However, they are often distracted by irrelevant or noisy context in input sequences that degrades output quality. This problem affects both long- and short-context scenarios, such as retrieval-augmented generation, table question-answering, and in-context learning. We reveal that LLMs can implicitly identify whether input sequences contain useful information at early layers, prior to token generation. Leveraging this insight, we introduce Early Noise Dropping (\\textsc{END}), a novel approach to mitigate this issue without requiring fine-tuning the LLMs. \\textsc{END} segments input sequences into chunks and employs a linear prober on the early layers of LLMs to differentiate between informative and noisy chunks. By discarding noisy chunks early in the process, \\textsc{END} preserves critical information, reduces distraction, and lowers computational overhead. Extensive experiments demonstrate that \\textsc{END} significantly improves both performance and efficiency across different LLMs on multiple evaluation datasets. Furthermore, by investigating LLMs' implicit understanding to the input with the prober, this work also deepens understanding of how LLMs do reasoning with contexts internally.",
+      "citations": 1
+    },
+    {
+      "title": "The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets",
+      "year": 2023,
+      "authors": "Samuel Marks, Max Tegmark",
+      "url": "https://www.semanticscholar.org/paper/d59523889679aee15992c4bf6e52b134186d07d3",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) have impressive capabilities, but are prone to outputting falsehoods. Recent work has developed techniques for inferring whether a LLM is telling the truth by training probes on the LLM's internal activations. However, this line of work is controversial, with some authors pointing out failures of these probes to generalize in basic ways, among other conceptual issues. In this work, we use high-quality datasets of simple true/false statements to study in detail the structure of LLM representations of truth, drawing on three lines of evidence: 1. Visualizations of LLM true/false statement representations, which reveal clear linear structure. 2. Transfer experiments in which probes trained on one dataset generalize to different datasets. 3. Causal evidence obtained by surgically intervening in a LLM's forward pass, causing it to treat false statements as true and vice versa. Overall, we present evidence that at sufficient scale, LLMs linearly represent the truth or falsehood of factual statements. We also show that simple difference-in-mean probes generalize as well as other probing techniques while identifying directions which are more causally implicated in model outputs.",
+      "citations": 396
+    },
+    {
+      "title": "Self-Aware Knowledge Probing: Evaluating Language Models'Relational Knowledge through Confidence Calibration",
+      "year": 2026,
+      "authors": "Christopher Kissling, Elena Merdjanovska, Alan Akbik",
+      "url": "https://api.semanticscholar.org/CorpusId:285071737",
+      "relevance": 1,
+      "abstract": "Knowledge probing quantifies how much relational knowledge a language model (LM) has acquired during pre-training. Existing knowledge probes evaluate model capabilities through metrics like prediction accuracy and precision. Such evaluations fail to account for the model's reliability, reflected in the calibration of its confidence scores. In this paper, we propose a novel calibration probing framework for relational knowledge, covering three modalities of model confidence: (1) intrinsic confidence, (2) structural consistency and (3) semantic grounding. Our extensive analysis of ten causal and six masked language models reveals that most models, especially those pre-trained with the masking objective, are overconfident. The best-calibrated scores come from confidence estimates that account for inconsistencies due to statement rephrasing. Moreover, even the largest pre-trained models fail to encode the semantics of linguistic confidence expressions accurately.",
+      "citations": 0
+    },
+    {
+      "title": "Nuance Matters: Probing Epistemic Consistency in Causal Reasoning",
+      "year": 2024,
+      "authors": "Shaobo Cui, Junyou Li, Luca Mouchel, Yiyang Feng, Boi Faltings",
+      "url": "https://api.semanticscholar.org/CorpusId:272366814",
+      "relevance": 1,
+      "abstract": "Previous research on causal reasoning often overlooks the subtleties crucial to understanding causal reasoning. To address this gap, our study introduces the concept of causal epistemic consistency, which focuses on the self-consistency of Large Language Models (LLMs) in differentiating intermediates with nuanced differences in causal reasoning. We propose a suite of novel metrics -- intensity ranking concordance, cross-group position agreement, and intra-group clustering -- to evaluate LLMs on this front. Through extensive empirical studies on 21 high-profile LLMs, including GPT-4, Claude3, and LLaMA3-70B, we have favoring evidence that current models struggle to maintain epistemic consistency in identifying the polarity and intensity of intermediates in causal reasoning. Additionally, we explore the potential of using internal token probabilities as an auxiliary tool to maintain causal epistemic consistency. In summary, our study bridges a critical gap in AI research by investigating the self-consistency over fine-grained intermediates involved in causal reasoning.",
+      "citations": 2
+    },
+    {
+      "title": "LLaMAs Have Feelings Too: Unveiling Sentiment and Emotion Representations in LLaMA Models Through Probing",
+      "year": 2025,
+      "authors": "Dario Di Palma, A. D. Bellis, Giovanni Servedio, V. W. Anelli, F. Narducci, T. D. Noia",
+      "url": "https://api.semanticscholar.org/CorpusId:278789542",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) have rapidly become central to NLP, demonstrating their ability to adapt to various tasks through prompting techniques, including sentiment analysis. However, we still have a limited understanding of how these models capture sentiment-related information. This study probes the hidden layers of Llama models to pinpoint where sentiment features are most represented and to assess how this affects sentiment analysis. Using probe classifiers, we analyze sentiment encoding across layers and scales, identifying the layers and pooling methods that best capture sentiment signals. Our results show that sentiment information is most concentrated in mid-layers for binary polarity tasks, with detection accuracy increasing up to 14% over prompting techniques. Additionally, we find that in decoder-only models, the last token is not consistently the most informative for sentiment encoding. Finally, this approach enables sentiment tasks to be performed with memory requirements reduced by an average of 57%. These insights contribute to a broader understanding of sentiment in LLMs, suggesting layer-specific probing as an effective approach for sentiment tasks beyond prompting, with potential to enhance model utility and reduce memory requirements.",
+      "citations": 6
+    },
+    {
+      "title": "Probing then Editing Response Personality of Large Language Models",
+      "year": 2025,
+      "authors": "Tianjie Ju, Zhenyu Shao, Bowen Wang, Yujia Chen, Zhuosheng Zhang, Hao Fei, Mong Li Lee, W. Hsu, Sufeng Duan, Gongshen Liu",
+      "url": "https://api.semanticscholar.org/CorpusId:277780769",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) have demonstrated promising capabilities to generate responses that simulate consistent personality traits. Despite the major attempts to analyze personality expression through output-based evaluations, little is known about how such traits are internally encoded within LLM parameters. In this paper, we introduce a layer-wise probing framework to systematically investigate the layer-wise capability of LLMs in simulating personality for responding. We conduct probing experiments on 11 open-source LLMs over the PersonalityEdit benchmark and find that LLMs predominantly simulate personality for responding in their middle and upper layers, with instruction-tuned models demonstrating a slightly clearer separation of personality traits. Furthermore, by interpreting the trained probing hyperplane as a layer-wise boundary for each personality category, we propose a layer-wise perturbation method to edit the personality expressed by LLMs during inference. Our results show that even when the prompt explicitly specifies a particular personality, our method can still successfully alter the response personality of LLMs. Interestingly, the difficulty of converting between certain personality traits varies substantially, which aligns with the representational distances in our probing experiments. Finally, we conduct a comprehensive MMLU benchmark evaluation and time overhead analysis, demonstrating that our proposed personality editing method incurs only minimal degradation in general capabilities while maintaining low training costs and acceptable inference latency. Our code is publicly available at https://github.com/universe-sky/probing-then-editing-personality.",
+      "citations": 4
+    },
+    {
+      "title": "Probing LLMs for Multilingual Discourse Generalization Through a Unified Label Set",
+      "year": 2025,
+      "authors": "Florian Eichin, Yang Janet Liu, Barbara Plank, Michael A. Hedderich",
+      "url": "https://www.semanticscholar.org/paper/3b5992316b0d507820cf63615b7e8eb1dfab1da6",
+      "relevance": 1,
+      "abstract": "Discourse understanding is essential for many NLP tasks, yet most existing work remains constrained by framework-dependent discourse representations. This work investigates whether large language models (LLMs) capture discourse knowledge that generalizes across languages and frameworks. We address this question along two dimensions: (1) developing a unified discourse relation label set to facilitate cross-lingual and cross-framework discourse analysis, and (2) probing LLMs to assess whether they encode generalizable discourse abstractions. Using multilingual discourse relation classification as a testbed, we examine a comprehensive set of 23 LLMs of varying sizes and multilingual capabilities. Our results show that LLMs, especially those with multilingual training corpora, can generalize discourse information across languages and frameworks. Further layer-wise analyses reveal that language generalization at the discourse level is most salient in the intermediate layers. Lastly, our error analysis provides an account of challenging relation classes.",
+      "citations": 6
+    },
+    {
+      "title": "Beyond Accuracy: Evaluating the Reasoning Behavior of Large Language Models - A Survey",
+      "year": 2024,
+      "authors": "Philipp Mondorf, Barbara Plank",
+      "url": "https://api.semanticscholar.org/CorpusId:268857112",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) have recently shown impressive performance on tasks involving reasoning, leading to a lively debate on whether these models possess reasoning capabilities similar to humans. However, despite these successes, the depth of LLMs' reasoning abilities remains uncertain. This uncertainty partly stems from the predominant focus on task performance, measured through shallow accuracy metrics, rather than a thorough investigation of the models' reasoning behavior. This paper seeks to address this gap by providing a comprehensive review of studies that go beyond task accuracy, offering deeper insights into the models' reasoning processes. Furthermore, we survey prevalent methodologies to evaluate the reasoning behavior of LLMs, emphasizing current trends and efforts towards more nuanced reasoning analyses. Our review suggests that LLMs tend to rely on surface-level patterns and correlations in their training data, rather than on sophisticated reasoning abilities. Additionally, we identify the need for further research that delineates the key differences between human and LLM-based reasoning. Through this survey, we aim to shed light on the complex reasoning processes within LLMs.",
+      "citations": 95
+    },
+    {
+      "title": "Decoding Emotion in the Deep: A Systematic Study of How LLMs Represent, Retain, and Express Emotion",
+      "year": 2025,
+      "authors": "Jingxiang Zhang, Lujia Zhong",
+      "url": "https://api.semanticscholar.org/CorpusId:281842755",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) are increasingly expected to navigate the nuances of human emotion. While research confirms that LLMs can simulate emotional intelligence, their internal emotional mechanisms remain largely unexplored. This paper investigates the latent emotional representations within modern LLMs by asking: how, where, and for how long is emotion encoded in their neural architecture? To address this, we introduce a novel, large-scale Reddit corpus of approximately 400,000 utterances, balanced across seven basic emotions through a multi-stage process of classification, rewriting, and synthetic generation. Using this dataset, we employ lightweight\"probes\"to read out information from the hidden layers of various Qwen3 and LLaMA models without altering their parameters. Our findings reveal that LLMs develop a surprisingly well-defined internal geometry of emotion, which sharpens with model scale and significantly outperforms zero-shot prompting. We demonstrate that this emotional signal is not a final-layer phenomenon but emerges early and peaks mid-network. Furthermore, the internal states are both malleable (they can be influenced by simple system prompts) and persistent, as the initial emotional tone remains detectable for hundreds of subsequent tokens. We contribute our dataset, an open-source probing toolkit, and a detailed map of the emotional landscape within LLMs, offering crucial insights for developing more transparent and aligned AI systems. The code and dataset are open-sourced.",
+      "citations": 1
+    },
+    {
+      "title": "Mitigating Fine-tuning Risks in LLMs via Safety-Aware Probing Optimization",
+      "year": 2025,
+      "authors": "Chengcan Wu, Zhixin Zhang, Zeming Wei, Yihao Zhang, Meng Sun",
+      "url": "https://api.semanticscholar.org/CorpusId:278789493",
+      "relevance": 1,
+      "abstract": "The significant progress of large language models (LLMs) has led to remarkable achievements across numerous applications. However, their ability to generate harmful content has sparked substantial safety concerns. Despite the implementation of safety alignment techniques during the pre-training phase, recent research indicates that fine-tuning LLMs on adversarial or even benign data can inadvertently compromise their safety. In this paper, we re-examine the fundamental issue of why fine-tuning on non-harmful data still results in safety degradation. We introduce a safety-aware probing (SAP) optimization framework designed to mitigate the safety risks of fine-tuning LLMs. Specifically, SAP incorporates a safety-aware probe into the gradient propagation process, mitigating the model's risk of safety degradation by identifying potential pitfalls in gradient directions, thereby enhancing task-specific performance while successfully preserving model safety. Our extensive experimental results demonstrate that SAP effectively reduces harmfulness below the original fine-tuned model and achieves comparable test loss to standard fine-tuning methods. Our code is available at https://github.com/ChengcanWu/SAP.",
+      "citations": 10
+    },
+    {
+      "title": "Far from the Shallow: Brain-Predictive Reasoning Embedding through Residual Disentanglement",
+      "year": 2025,
+      "authors": "Linyang He, Tianjun Zhong, Richard J. Antonello, Gavin Mischler, Micah Goldblum, N. Mesgarani",
+      "url": "https://api.semanticscholar.org/CorpusId:282389415",
+      "relevance": 1,
+      "abstract": "Understanding how the human brain progresses from processing simple linguistic inputs to performing high-level reasoning is a fundamental challenge in neuroscience. While modern large language models (LLMs) are increasingly used to model neural responses to language, their internal representations are highly\"entangled,\"mixing information about lexicon, syntax, meaning, and reasoning. This entanglement biases conventional brain encoding analyses toward linguistically shallow features (e.g., lexicon and syntax), making it difficult to isolate the neural substrates of cognitively deeper processes. Here, we introduce a residual disentanglement method that computationally isolates these components. By first probing an LM to identify feature-specific layers, our method iteratively regresses out lower-level representations to produce four nearly orthogonal embeddings for lexicon, syntax, meaning, and, critically, reasoning. We used these disentangled embeddings to model intracranial (ECoG) brain recordings from neurosurgical patients listening to natural speech. We show that: 1) This isolated reasoning embedding exhibits unique predictive power, accounting for variance in neural activity not explained by other linguistic features and even extending to the recruitment of visual regions beyond classical language areas. 2) The neural signature for reasoning is temporally distinct, peaking later (~350-400ms) than signals related to lexicon, syntax, and meaning, consistent with its position atop a processing hierarchy. 3) Standard, non-disentangled LLM embeddings can be misleading, as their predictive success is primarily attributable to linguistically shallow features, masking the more subtle contributions of deeper cognitive processing.",
+      "citations": 2
+    },
+    {
+      "title": "CoT Vectors: Transferring and Probing the Reasoning Mechanisms of LLMs",
+      "year": 2025,
+      "authors": "Li Li, Ziyi Wang, Yongliang Wu, Jianfei Cai, Xu Yang",
+      "url": "https://www.semanticscholar.org/paper/7469ea5b8d6494698f579f522693732dbf3ddfa6",
+      "relevance": 1,
+      "abstract": "Chain-of-Thought (CoT) prompting has emerged as a powerful approach to enhancing the reasoning capabilities of Large Language Models (LLMs). However, existing implementations, such as in-context learning and fine-tuning, remain costly and inefficient. To improve CoT reasoning at a lower cost, and inspired by the task vector paradigm, we introduce CoT Vectors, compact representations that encode task-general, multi-step reasoning knowledge. Through experiments with Extracted CoT Vectors, we observe pronounced layer-wise instability, manifesting as a U-shaped performance curve that reflects a systematic three-stage reasoning process in LLMs. To address this limitation, we propose Learnable CoT Vectors, optimized under a teacher-student framework to provide more stable and robust guidance. Extensive evaluations across diverse benchmarks and models demonstrate that CoT Vectors not only outperform existing baselines but also achieve performance comparable to parameter-efficient fine-tuning methods, while requiring fewer trainable parameters. Moreover, by treating CoT Vectors as a probe, we uncover how their effectiveness varies due to latent space structure, information density, acquisition mechanisms, and pre-training differences, offering new insights into the functional organization of multi-step reasoning in LLMs. The source code will be released.",
+      "citations": 0
+    },
+    {
+      "title": "Fantastic Semantics and Where to Find Them: Investigating Which Layers of Generative LLMs Reflect Lexical Semantics",
+      "year": 2024,
+      "authors": "Zhu Liu, Cunliang Kong, Ying Liu, Maosong Sun",
+      "url": "https://www.semanticscholar.org/paper/d50bd64bd9d9f57b90760ff543688d0ffd3b1a55",
+      "relevance": 1,
+      "abstract": "Large language models have achieved remarkable success in general language understanding tasks. However, as a family of generative methods with the objective of next token prediction, the semantic evolution with the depth of these models are not fully explored, unlike their predecessors, such as BERT-like architectures. In this paper, we specifically investigate the bottom-up evolution of lexical semantics for a popular LLM, namely Llama2, by probing its hidden states at the end of each layer using a contextualized word identification task. Our experiments show that the representations in lower layers encode lexical semantics, while the higher layers, with weaker semantic induction, are responsible for prediction. This is in contrast to models with discriminative objectives, such as mask language modeling, where the higher layers obtain better lexical semantics. The conclusion is further supported by the monotonic increase in performance via the hidden states for the last meaningless symbols, such as punctuation, in the prompting strategy. Our codes are available at https://github.com/RyanLiut/LLM_LexSem.",
+      "citations": 36
+    },
+    {
+      "title": "BERT Rediscovers the Classical NLP Pipeline",
+      "year": 2019,
+      "authors": "Ian Tenney, Dipanjan Das, Ellie Pavlick",
+      "url": "https://www.semanticscholar.org/paper/97906df07855b029b7aae7c2a1c6c5e8df1d531c",
+      "relevance": 1,
+      "abstract": "Pre-trained text encoders have rapidly advanced the state of the art on many NLP tasks. We focus on one such model, BERT, and aim to quantify where linguistic information is captured within the network. We find that the model represents the steps of the traditional NLP pipeline in an interpretable and localizable way, and that the regions responsible for each step appear in the expected sequence: POS tagging, parsing, NER, semantic roles, then coreference. Qualitative analysis reveals that the model can and often does adjust this pipeline dynamically, revising lower-level decisions on the basis of disambiguating information from higher-level representations.",
+      "citations": 1716
+    },
+    {
+      "title": "Prompting Underestimates LLM Capability for Time Series Classification",
+      "year": 2026,
+      "authors": "Dan Schumacher, E. Nourbakhsh, Rocky Slavin, Anthony Rios",
+      "url": "https://www.semanticscholar.org/paper/73a27ce66477b973c8737532c71ccead35195c35",
+      "relevance": 1,
+      "abstract": "Prompt-based evaluations suggest that large language models (LLMs) perform poorly on time series classification, raising doubts about whether they encode meaningful temporal structure. We show that this conclusion reflects limitations of prompt-based generation rather than the model's representational capacity by directly comparing prompt outputs with linear probes over the same internal representations. While zero-shot prompting performs near chance, linear probes improve average F1 from 0.15-0.26 to 0.61-0.67, often matching or exceeding specialized time series models. Layer-wise analyses further show that class-discriminative time series information emerges in early transformer layers and is amplified by visual and multimodal inputs. Together, these results demonstrate a systematic mismatch between what LLMs internally represent and what prompt-based evaluation reveals, leading current evaluations to underestimate their time series understanding.",
+      "citations": 0
+    },
+    {
+      "title": "Large Language Models as Neurolinguistic Subjects: Discrepancy between Performance and Competence",
+      "year": 2024,
+      "authors": "Linyang He, Ercong Nie, Helmut Schmid, Hinrich Schutze, N. Mesgarani, Jonathan Brennan",
+      "url": "https://api.semanticscholar.org/CorpusId:276617925",
+      "relevance": 1,
+      "abstract": "This study investigates the linguistic understanding of Large Language Models (LLMs) regarding signifier (form) and signified (meaning) by distinguishing two LLM assessment paradigms: psycholinguistic and neurolinguistic. Traditional psycholinguistic evaluations often reflect statistical rules that may not accurately represent LLMs'true linguistic competence. We introduce a neurolinguistic approach, utilizing a novel method that combines minimal pair and diagnostic probing to analyze activation patterns across model layers. This method allows for a detailed examination of how LLMs represent form and meaning, and whether these representations are consistent across languages. We found: (1) Psycholinguistic and neurolinguistic methods reveal that language performance and competence are distinct; (2) Direct probability measurement may not accurately assess linguistic competence; (3) Instruction tuning won't change much competence but improve performance; (4) LLMs exhibit higher competence and performance in form compared to meaning. Additionally, we introduce new conceptual minimal pair datasets for Chinese (COMPS-ZH) and German (COMPS-DE), complementing existing English datasets.",
+      "citations": 3
+    },
+    {
+      "title": "Triple Phase Transitions: Understanding the Learning Dynamics of Large Language Models from a Neuroscience Perspective",
+      "year": 2025,
+      "authors": "Yuko Nakagi, Keigo Tada, Sota Yoshino, Shinji Nishimoto, Yu Takagi",
+      "url": "https://api.semanticscholar.org/CorpusId:276724796",
+      "relevance": 1,
+      "abstract": "Large language models (LLMs) often exhibit abrupt emergent behavior, whereby new abilities arise at certain points during their training. This phenomenon, commonly referred to as a ''phase transition'', remains poorly understood. In this study, we conduct an integrative analysis of such phase transitions by examining three interconnected perspectives: the similarity between LLMs and the human brain, the internal states of LLMs, and downstream task performance. We propose a novel interpretation for the learning dynamics of LLMs that vary in both training data and architecture, revealing that three phase transitions commonly emerge across these models during training: (1) alignment with the entire brain surges as LLMs begin adhering to task instructions Brain Alignment and Instruction Following, (2) unexpectedly, LLMs diverge from the brain during a period in which downstream task accuracy temporarily stagnates Brain Detachment and Stagnation, and (3) alignment with the brain reoccurs as LLMs become capable of solving the downstream tasks Brain Realignment and Consolidation. These findings illuminate the underlying mechanisms of phase transitions in LLMs, while opening new avenues for interdisciplinary research bridging AI and neuroscience.",
+      "citations": 4
+    },
+    {
+      "title": "Sparse Reward Subsystem in Large Language Models",
+      "year": 2026,
+      "authors": "Guowei Xu, Mert Yuksekgonul, James Zou",
+      "url": "https://api.semanticscholar.org/CorpusId:285270323",
+      "relevance": 1,
+      "abstract": "In this paper, we identify a sparse reward subsystem within the hidden states of Large Language Models (LLMs), drawing an analogy to the biological reward subsystem in the human brain. We demonstrate that this subsystem contains value neurons that represent the model's internal expectation of state value, and through intervention experiments, we establish the importance of these neurons for reasoning. Our experiments reveal that these value neurons are robust across diverse datasets, model scales, and architectures; furthermore, they exhibit significant transferability across different datasets and models fine-tuned from the same base model. By examining cases where value predictions and actual rewards diverge, we identify dopamine neurons within the reward subsystem which encode reward prediction errors (RPE). These neurons exhibit high activation when the reward is higher than expected and low activation when the reward is lower than expected.",
+      "citations": 0
+    },
+    {
+      "title": "Knowing Before Saying: LLM Representations Encode Information About Chain-of-Thought Success Before Completion",
+      "year": 2025,
+      "authors": "Anum Afzal, Florian Matthes, Gal Chechik, Yftah Ziser",
+      "url": "https://api.semanticscholar.org/CorpusId:279070596",
+      "relevance": 1,
+      "abstract": "We investigate whether the success of a zero-shot Chain-of-Thought (CoT) process can be predicted before completion. We discover that a probing classifier, based on LLM representations, performs well \\emph{even before a single token is generated}, suggesting that crucial information about the reasoning process is already present in the initial steps representations. In contrast, a strong BERT-based baseline, which relies solely on the generated tokens, performs worse, likely because it depends on shallow linguistic cues rather than deeper reasoning dynamics. Surprisingly, using later reasoning steps does not always improve classification. When additional context is unhelpful, earlier representations resemble later ones more, suggesting LLMs encode key information early. This implies reasoning can often stop early without loss. To test this, we conduct early stopping experiments, showing that truncating CoT reasoning still improves performance over not using CoT at all, though a gap remains compared to full reasoning. However, approaches like supervised learning or reinforcement learning designed to shorten CoT chains could leverage our classifier's guidance to identify when early stopping is effective. Our findings provide insights that may support such methods, helping to optimize CoT's efficiency while preserving its benefits.",
+      "citations": 8
+    },
+    {
+      "title": "How Language Directions Align with Token Geometry in Multilingual LLMs",
+      "year": 2025,
+      "authors": "Jae-Seong Kim, Suan Lee",
+      "url": "https://www.semanticscholar.org/paper/5c6eb70270c13983f9ee503edcb9c9f940dd3b4f",
+      "relevance": 1,
+      "abstract": "Multilingual LLMs demonstrate strong performance across diverse languages, yet there has been limited systematic analysis of how language information is structured within their internal representation space and how it emerges across layers. We conduct a comprehensive probing study on six multilingual LLMs, covering all 268 transformer layers, using linear and nonlinear probes together with a new Token--Language Alignment analysis to quantify the layer-wise dynamics and geometric structure of language encoding. Our results show that language information becomes sharply separated in the first transformer block (+76.4$\\pm$8.2 percentage points from Layer 0 to 1) and remains almost fully linearly separable throughout model depth. We further find that the alignment between language directions and vocabulary embeddings is strongly tied to the language composition of the training data. Notably, Chinese-inclusive models achieve a ZH Match@Peak of 16.43\\%, whereas English-centric models achieve only 3.90\\%, revealing a 4.21$\\times$ structural imprinting effect. These findings indicate that multilingual LLMs distinguish languages not by surface script features but by latent representational structures shaped by the training corpus. Our analysis provides practical insights for data composition strategies and fairness in multilingual representation learning. All code and analysis scripts are publicly available at: https://github.com/thisiskorea/How-Language-Directions-Align-with-Token-Geometry-in-Multilingual-LLMs.",
+      "citations": 0
+    },
+    {
+      "title": "Hierarchical Frequency Tagging Probe (HFTP): A Unified Approach to Investigate Syntactic Structure Representations in Large Language Models and the Human Brain",
+      "year": 2025,
+      "authors": "Jingmin An, Yilong Song, Ruolin Yang, Nai Ding, Lingxi Lu, Yuxuan Wang, Wei Wang, Zhuang Chu, Qian Wang, Fang Fang",
+      "url": "https://www.semanticscholar.org/paper/2199edcabec63276f3ba153c8708ea15bc6e75ae",
+      "relevance": 1,
+      "abstract": "Large Language Models (LLMs) demonstrate human-level or even superior language abilities, effectively modeling syntactic structures, yet the specific computational modules responsible remain unclear. A key question is whether LLM behavioral capabilities stem from mechanisms akin to those in the human brain. To address these questions, we introduce the Hierarchical Frequency Tagging Probe (HFTP), a tool that utilizes frequency-domain analysis to identify neuron-wise components of LLMs (e.g., individual Multilayer Perceptron (MLP) neurons) and cortical regions (via intracranial recordings) encoding syntactic structures. Our results show that models such as GPT-2, Gemma, Gemma 2, Llama 2, Llama 3.1, and GLM-4 process syntax in analogous layers, while the human brain relies on distinct cortical regions for different syntactic levels. Representational similarity analysis reveals a stronger alignment between LLM representations and the left hemisphere of the brain (dominant in language processing). Notably, upgraded models exhibit divergent trends: Gemma 2 shows greater brain similarity than Gemma, while Llama 3.1 shows less alignment with the brain compared to Llama 2. These findings offer new insights into the interpretability of LLM behavioral improvements, raising questions about whether these advancements are driven by human-like or non-human-like mechanisms, and establish HFTP as a valuable tool bridging computational linguistics and cognitive neuroscience. This project is available at https://github.com/LilTiger/HFTP.",
+      "citations": 2
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\resizebox{0.95\linewidth}{!}{%
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Model & Best \tomi Test \auroc (Layer) & Best \truthfulqa Test \auroc (Layer) \\
+\midrule
+\gpttwo & 0.545 (L9) & 0.692 (L9) \\
+\gpttwomedium & 0.537 (L16) & 0.701 (L19) \\
+\llamasevenb & {\bf 0.551} (L13) & {\bf 0.756} (L13/L15) \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Best independent test-layer \auroc values, selected directly on test curves for descriptive analysis (not model selection).}
+\label{tab:best_layers}
+\end{table}

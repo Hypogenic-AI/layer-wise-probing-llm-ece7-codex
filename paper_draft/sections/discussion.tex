@@ -1,0 +1,12 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\para{{\bf Interpreting decodability.}} Our results support layer-local decodability, but not a strong claim of semantic belief abstraction. The strongest evidence is on \truthfulqa in late layers of larger models; the weakest is on \tomi, where a simple lexical model remains competitive. This asymmetry suggests that probes capture both meaningful internal structure and superficial correlations.
+
+\para{{\bf Why robustness is mixed.}} We observe both degradation and improvement under perturbation. A plausible explanation is that lexical substitutions can either disrupt useful cues or remove distractors, depending on task and model. Because corrected significance is null, we interpret robustness outcomes as suggestive trends rather than confirmed effects.
+
+\para{{\bf Practical implication for interpretability workflows.}} Layer-wise probes are still useful diagnostics. They can identify candidate layers for deeper causal analysis and can prioritize where to test interventions. But we should avoid treating probe accuracy alone as evidence that the model ``has'' explicit, stable beliefs.
+
+\para{{\bf Limitations.}} We used capped splits (300/80/80) for feasibility with \llamasevenb; this reduces statistical power and may increase layer-selection variance. \truthfulqa labels are class-imbalanced at candidate level, which inflates accuracy and complicates F1 interpretation. We also used a public Llama-family mirror rather than gated Meta checkpoints. Finally, we did not perform causal interventions in this cycle.
+
+\para{{\bf Broader implications.}} For safety and hallucination mitigation, these findings argue for a two-step standard: first locate decodable signals with probes, then validate mechanism and invariance with causal and semantic-preserving tests. This standard can reduce over-interpretation in reliability claims.

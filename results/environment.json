@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-02-21T21:39:19.831121",
+  "python": "3.12.2 | packaged by Anaconda, Inc. | (main, Feb 27 2024, 17:35:02) [GCC 11.2.0]",
+  "torch": "2.10.0+cu128",
+  "transformers": "5.2.0",
+  "sklearn": "1.8.0",
+  "device": "cuda",
+  "gpu_info": {
+    "available": true,
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": "24576 MiB",
+        "memory_free": "24158 MiB"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": "24576 MiB",
+        "memory_free": "24158 MiB"
+      }
+    ]
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "max_train": 300,
+  "max_val": 80,
+  "max_test": 80,
+  "models_requested": "gpt2,gpt2_medium,llama7b"
+}

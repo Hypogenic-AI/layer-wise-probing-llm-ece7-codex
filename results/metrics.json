@@ -1,0 +1,306 @@
+{
+  "environment": {
+    "timestamp": "2026-02-21T21:39:19.831121",
+    "python": "3.12.2 | packaged by Anaconda, Inc. | (main, Feb 27 2024, 17:35:02) [GCC 11.2.0]",
+    "torch": "2.10.0+cu128",
+    "transformers": "5.2.0",
+    "sklearn": "1.8.0",
+    "device": "cuda",
+    "gpu_info": {
+      "available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA GeForce RTX 3090",
+          "memory_total": "24576 MiB",
+          "memory_free": "24158 MiB"
+        },
+        {
+          "name": "NVIDIA GeForce RTX 3090",
+          "memory_total": "24576 MiB",
+          "memory_free": "24158 MiB"
+        }
+      ]
+    },
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "max_train": 300,
+    "max_val": 80,
+    "max_test": 80,
+    "models_requested": "gpt2,gpt2_medium,llama7b"
+  },
+  "data_summary": {
+    "tomi_nli": {
+      "train": {
+        "n": 300,
+        "class_counts": {
+          "0": 144,
+          "1": 156
+        },
+        "missing_text": 0,
+        "avg_word_length": 59.04666666666667,
+        "std_word_length": 6.146908888936689,
+        "min_word_length": 43,
+        "max_word_length": 74
+      },
+      "val": {
+        "n": 80,
+        "class_counts": {
+          "1": 48,
+          "0": 32
+        },
+        "missing_text": 0,
+        "avg_word_length": 59.55,
+        "std_word_length": 6.505574532660432,
+        "min_word_length": 48,
+        "max_word_length": 73
+      },
+      "test": {
+        "n": 80,
+        "class_counts": {
+          "0": 41,
+          "1": 39
+        },
+        "missing_text": 0,
+        "avg_word_length": 59.025,
+        "std_word_length": 7.056867222783777,
+        "min_word_length": 44,
+        "max_word_length": 75
+      },
+      "test_perturbed": {
+        "n": 80,
+        "class_counts": {
+          "1": 46,
+          "0": 34
+        },
+        "missing_text": 0,
+        "avg_word_length": 61.5,
+        "std_word_length": 7.12916544905503,
+        "min_word_length": 45,
+        "max_word_length": 83
+      },
+      "test_rephrased": {
+        "n": 80,
+        "class_counts": {
+          "1": 45,
+          "0": 35
+        },
+        "missing_text": 0,
+        "avg_word_length": 61.2,
+        "std_word_length": 6.257795138864806,
+        "min_word_length": 47,
+        "max_word_length": 78
+      }
+    },
+    "truthfulqa_mc": {
+      "train": {
+        "n": 300,
+        "class_counts": {
+          "0": 239,
+          "1": 61
+        },
+        "missing_text": 0,
+        "avg_word_length": 30.78,
+        "std_word_length": 7.244648599713677,
+        "min_word_length": 17,
+        "max_word_length": 60
+      },
+      "val": {
+        "n": 80,
+        "class_counts": {
+          "0": 64,
+          "1": 16
+        },
+        "missing_text": 0,
+        "avg_word_length": 30.6,
+        "std_word_length": 7.761443164772902,
+        "min_word_length": 18,
+        "max_word_length": 59
+      },
+      "test": {
+        "n": 80,
+        "class_counts": {
+          "0": 59,
+          "1": 21
+        },
+        "missing_text": 0,
+        "avg_word_length": 29.925,
+        "std_word_length": 6.849771894012238,
+        "min_word_length": 18,
+        "max_word_length": 54
+      },
+      "test_perturbed": {
+        "n": 80,
+        "class_counts": {
+          "0": 59,
+          "1": 21
+        },
+        "missing_text": 0,
+        "avg_word_length": 30.925,
+        "std_word_length": 6.849771894012238,
+        "min_word_length": 19,
+        "max_word_length": 55
+      },
+      "test_rephrased": {
+        "n": 80,
+        "class_counts": {
+          "0": 59,
+          "1": 21
+        },
+        "missing_text": 0,
+        "avg_word_length": 28.925,
+        "std_word_length": 6.849771894012238,
+        "min_word_length": 17,
+        "max_word_length": 53
+      }
+    }
+  },
+  "summary": [
+    {
+      "model": "gpt2",
+      "task": "tomi_nli",
+      "peak_layer": 5,
+      "surface_baseline_auroc": 0.5684803001876173,
+      "surface_baseline_acc": 0.5375
+    },
+    {
+      "model": "gpt2",
+      "task": "truthfulqa_mc",
+      "peak_layer": 1,
+      "surface_baseline_auroc": 0.5262308313155771,
+      "surface_baseline_acc": 0.7625
+    },
+    {
+      "model": "gpt2_medium",
+      "task": "tomi_nli",
+      "peak_layer": 10,
+      "surface_baseline_auroc": 0.5684803001876173,
+      "surface_baseline_acc": 0.5375
+    },
+    {
+      "model": "gpt2_medium",
+      "task": "truthfulqa_mc",
+      "peak_layer": 10,
+      "surface_baseline_auroc": 0.5262308313155771,
+      "surface_baseline_acc": 0.7625
+    },
+    {
+      "model": "llama7b",
+      "task": "tomi_nli",
+      "peak_layer": 13,
+      "surface_baseline_auroc": 0.5684803001876173,
+      "surface_baseline_acc": 0.5375
+    },
+    {
+      "model": "llama7b",
+      "task": "truthfulqa_mc",
+      "peak_layer": 9,
+      "surface_baseline_auroc": 0.5262308313155771,
+      "surface_baseline_acc": 0.7625
+    }
+  ],
+  "stats": [
+    {
+      "model": "gpt2",
+      "task": "tomi_nli",
+      "peak_layer": 5,
+      "test_auroc_mean": 0.44652908067542213,
+      "pert_auroc_mean": 0.6441815856777494,
+      "reph_auroc_mean": 0.5,
+      "auroc_drop_pert": -0.19765250500232723,
+      "auroc_drop_reph": -0.053470919324577815,
+      "p_wilcoxon_pert": 1.0,
+      "p_wilcoxon_reph": 1.0,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 1.0,
+      "p_wilcoxon_reph_fdr": 1.0
+    },
+    {
+      "model": "gpt2",
+      "task": "truthfulqa_mc",
+      "peak_layer": 1,
+      "test_auroc_mean": 0.6085552865213881,
+      "pert_auroc_mean": 0.6053268765133172,
+      "reph_auroc_mean": 0.48627925746569806,
+      "auroc_drop_pert": 0.0032284100080709477,
+      "auroc_drop_reph": 0.12227602905569002,
+      "p_wilcoxon_pert": 0.125,
+      "p_wilcoxon_reph": 0.125,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 0.25,
+      "p_wilcoxon_reph_fdr": 0.1875
+    },
+    {
+      "model": "gpt2_medium",
+      "task": "tomi_nli",
+      "peak_layer": 10,
+      "test_auroc_mean": 0.4377736085053158,
+      "pert_auroc_mean": 0.47698209718670076,
+      "reph_auroc_mean": 0.5314285714285714,
+      "auroc_drop_pert": -0.039208488681384934,
+      "auroc_drop_reph": -0.09365496292325554,
+      "p_wilcoxon_pert": 1.0,
+      "p_wilcoxon_reph": 1.0,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 1.0,
+      "p_wilcoxon_reph_fdr": 1.0
+    },
+    {
+      "model": "gpt2_medium",
+      "task": "truthfulqa_mc",
+      "peak_layer": 10,
+      "test_auroc_mean": 0.6166263115415659,
+      "pert_auroc_mean": 0.5762711864406779,
+      "reph_auroc_mean": 0.5310734463276836,
+      "auroc_drop_pert": 0.04035512510088801,
+      "auroc_drop_reph": 0.08555286521388228,
+      "p_wilcoxon_pert": 0.125,
+      "p_wilcoxon_reph": 0.125,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 0.25,
+      "p_wilcoxon_reph_fdr": 0.1875
+    },
+    {
+      "model": "llama7b",
+      "task": "tomi_nli",
+      "peak_layer": 13,
+      "test_auroc_mean": 0.5509693558474046,
+      "pert_auroc_mean": 0.45588235294117646,
+      "reph_auroc_mean": 0.4831746031746032,
+      "auroc_drop_pert": 0.09508700290622807,
+      "auroc_drop_reph": 0.06779475267280138,
+      "p_wilcoxon_pert": 0.125,
+      "p_wilcoxon_reph": 0.125,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 0.25,
+      "p_wilcoxon_reph_fdr": 0.1875
+    },
+    {
+      "model": "llama7b",
+      "task": "truthfulqa_mc",
+      "peak_layer": 9,
+      "test_auroc_mean": 0.639225181598063,
+      "pert_auroc_mean": 0.6933010492332525,
+      "reph_auroc_mean": 0.49798224374495553,
+      "auroc_drop_pert": -0.05407586763518957,
+      "auroc_drop_reph": 0.14124293785310738,
+      "p_wilcoxon_pert": 1.0,
+      "p_wilcoxon_reph": 0.125,
+      "d_pert": 0.0,
+      "d_reph": 0.0,
+      "p_wilcoxon_pert_fdr": 1.0,
+      "p_wilcoxon_reph_fdr": 0.1875
+    }
+  ],
+  "notes": [
+    "meta-llama gated checkpoints may be unavailable; public Llama-family mirror used when needed.",
+    "Probe decodability is evidence of encoded information, not direct proof of agent-level belief possession."
+  ]
+}

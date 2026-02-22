@@ -1,0 +1,8 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented a unified layer-wise probing study of belief-related labels across \gpttwo, \gpttwomedium, and \llamasevenb on \tomi and \truthfulqa. We found clear decodable signal, especially for epistemic truthfulness in later layers of larger models, with best test-layer \auroc up to 0.756. 
+
+At the same time, validation-layer instability, mixed perturbation effects, and non-significant corrected robustness tests show that current probe evidence is not sufficient to claim stable semantic belief representation. The strongest conclusion is pragmatic: probes are valuable for localization and diagnostics, but they should be paired with stronger robustness and causal tests before mechanistic interpretation.
+
+Next steps are to add intervention-based causal checks (e.g., ITI-style steering directions), expand sample sizes with grouped cross-validation, and evaluate stricter semantic-equivalence perturbations and out-of-distribution templates.

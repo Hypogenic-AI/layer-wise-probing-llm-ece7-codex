@@ -1,0 +1,10 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\para{{\bf Probing belief and truth signals in LLM internals.}} Several studies report that linear probes can decode latent belief or truthfulness information from hidden states. RepBelief finds separable self/other belief representations and shows intervention effects on behavior \citep{zhu2024language}. Azaria and Mitchell show that internal states can detect lying-related signals better than output text alone \citep{azaria2023internal}. These results motivate our layer-wise setup.
+
+\para{{\bf Robustness and causal caution.}} Decodability is not equivalent to semantic representation. ``Still No Lie Detector'' and ``Standards for Belief Representations'' argue that many probes fail conceptual and distribution-shift tests \citep{levinstein2023still,herrmann2024standards}. Brittle-activation work also reports sensitivity to prompt form and shows that intervention can partially repair behavior \citep{bortoletto2024brittle}. Our study directly incorporates this caution through perturbation and rephrasing evaluations.
+
+\para{{\bf Stability and epistemic evaluation.}} Recent work on representational and behavioral truth stability emphasizes perturbation-based stress testing rather than in-template accuracy alone \citep{dies2025representational}. Related uncertainty-estimation studies also link internal representations to calibration quality \citep{xiao2025enhancing}. We follow this direction by reporting \ece and Brier score alongside \auroc, accuracy, and F1.
+
+\para{{\bf Positioning of this paper.}} Unlike prior single-model or single-task studies, we use one standardized protocol across \gpttwo-family and \llamasevenb on both non-epistemic (\tomi) and epistemic (\truthfulqa) labels. Unlike purely decodability-focused evaluations, we combine robustness checks, lexical baselines, and corrected significance tests to constrain interpretation.
